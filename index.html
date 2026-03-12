@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Isac Gustafsson — Utvecklare & Strategisk Kompetens</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --orange: #d86b00;
+      --orange-light: #f0a050;
+      --dark: #1a1a1a;
+      --gray: #555;
+      --light-gray: #f5f5f5;
+      --white: #ffffff;
+      --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --max-width: 1100px;
+      --section-padding: 80px 0;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-main);
+      color: var(--dark);
+      background: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---- NAV ---- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--dark);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray);
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .hamburger {
+      display: none; cursor: pointer; flex-direction: column;
+      gap: 5px; background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--dark); border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; background: var(--white);
+        padding: 20px 24px; gap: 16px;
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+      }
+      .nav-links.open { display: flex; }
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      padding: 160px 24px 100px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 60px;
+    }
+    .hero-text { flex: 1; }
+    .hero-text .label {
+      display: inline-block;
+      background: rgba(216,107,0,0.1);
+      color: var(--orange);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      letter-spacing: 0.04em;
+    }
+    .hero-text h1 {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 20px;
+    }
+    .hero-text h1 span { color: var(--orange); }
+    .hero-text p {
+      font-size: 1.05rem;
+      color: var(--gray);
+      max-width: 480px;
+      margin-bottom: 30px;
+    }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: 8px;
+      font-size: 0.9rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+      cursor: pointer; border: none;
+    }
+    .btn-primary { background: var(--orange); color: #fff; }
+    .btn-primary:hover { background: #c05e00; transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--dark); border: 2px solid #ddd; }
+    .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
+
+    .hero-image {
+      flex: 0 0 300px;
+      height: 360px;
+      border-radius: 20px;
+      background: url('https://impro.usercontent.one/appid/oneComWsb/domain/isacgustafsson.se/media/isacgustafsson.se/onewebmedia/Webking_2023_MatsJonssonFoto_062.jpg?etag=%225dfc3d-6564478a%22&sourceContentType=image%2Fjpeg&ignoreAspectRatio&resize=996%2B664&extract=202%2B36%2B601%2B625&quality=85') center/cover no-repeat, linear-gradient(135deg, var(--orange), var(--orange-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+      .hero { flex-direction: column-reverse; padding: 120px 24px 60px; gap: 40px; }
+      .hero-text h1 { font-size: 2.2rem; }
+      .hero-image { flex: 0 0 auto; width: 200px; height: 240px; }
+    }
+
+    /* ---- SECTIONS ---- */
+    section { padding: var(--section-padding); }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+    .section-header {
+      margin-bottom: 50px;
+    }
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .section-header p {
+      color: var(--gray);
+      font-size: 1rem;
+      max-width: 500px;
+    }
+    .section-header .line {
+      width: 50px; height: 3px; background: var(--orange);
+      border-radius: 2px; margin-top: 14px;
+    }
+
+    /* ---- PROJECTS ---- */
+    #projekt { background: var(--light-gray); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .project-card {
+      background: var(--white);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+    .project-thumb {
+      height: 180px;
+      background: linear-gradient(135deg, #eee, #ddd);
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #bbb;
+      position: relative;
+    }
+    .timeline-icon img, .edu-icon img {
+      max-width: 100%; max-height: 100%; object-fit: contain;
+      border-radius: 4px;
+    }
+    .project-thumb .num {
+      position: absolute;
+      top: 12px; left: 16px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--orange);
+      background: rgba(216,107,0,0.1);
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+    .project-body { padding: 20px; }
+    .project-body h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .project-body p {
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tech-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: var(--light-gray);
+      color: var(--gray);
+    }
+
+    /* ---- ABOUT / QUOTES ---- */
+    .quotes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .quote-card {
+      background: var(--light-gray);
+      border-radius: 14px;
+      padding: 30px;
+      position: relative;
+    }
+    .quote-card::before {
+      content: '\201C';
+      font-family: var(--font-display);
+      font-size: 4rem;
+      color: var(--orange);
+      opacity: 0.3;
+      position: absolute;
+      top: 10px; left: 20px;
+      line-height: 1;
+    }
+    .quote-card p {
+      font-size: 0.95rem;
+      color: var(--gray);
+      line-height: 1.7;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .quote-card .author {
+      font-weight: 600;
+      color: var(--dark);
+      font-size: 0.88rem;
+    }
+
+    /* ---- EXPERIENCE ---- */
+    #erfarenheter { background: var(--light-gray); }
+    .timeline { display: flex; flex-direction: column; gap: 24px; }
+    .timeline-item {
+      display: flex;
+      gap: 24px;
+      background: var(--white);
+      border-radius: 14px;
+      padding: 28px;
+      border: 1px solid rgba(0,0,0,0.04);
+      transition: box-shadow 0.2s;
+    }
+    .timeline-item:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
+    .timeline-icon {
+      flex: 0 0 50px;
+      height: 50px;
+      border-radius: 12px;
+      background: rgba(216,107,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: var(--orange);
+      font-weight: 700;
+    }
+    .timeline-content h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+    .timeline-content .dates {
+      font-size: 0.82rem; color: var(--orange);
+      font-weight: 600; margin-bottom: 8px;
+    }
+    .timeline-content p { font-size: 0.88rem; color: var(--gray); line-height: 1.6; }
+    .timeline-content .skills-list {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .timeline-item { flex-direction: column; gap: 16px; }
+    }
+
+    /* ---- EDUCATION ---- */
+    .edu-cards { display: flex; flex-direction: column; gap: 20px; }
+    .edu-card {
+      display: flex; gap: 24px; align-items: center;
+      background: var(--light-gray); border-radius: 14px;
+      padding: 28px;
+    }
+    .edu-icon {
+      flex: 0 0 60px; height: 60px;
+      border-radius: 14px;
+      background: var(--orange);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; color: #fff;
+    }
+    .edu-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+    .edu-card .school { font-size: 0.88rem; color: var(--orange); font-weight: 600; }
+    .edu-card p { font-size: 0.85rem; color: var(--gray); margin-top: 6px; }
+
+    /* ---- CONTACT ---- */
+    #kontakt { background: var(--light-gray); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+    .contact-info h3 {
+      font-size: 1.3rem; font-weight: 700; margin-bottom: 20px;
+    }
+    .contact-item {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 18px;
+    }
+    .contact-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: rgba(216,107,0,0.1);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--orange); font-weight: 700; font-size: 1rem;
+    }
+    .contact-item span { font-size: 0.92rem; color: var(--gray); }
+    .contact-item a { color: var(--dark); text-decoration: none; font-weight: 500; }
+    .contact-item a:hover { color: var(--orange); }
+
+    .contact-form { display: flex; flex-direction: column; gap: 14px; }
+    .form-row { display: flex; gap: 14px; }
+    @media (max-width: 500px) { .form-row { flex-direction: column; } }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid #e8e8e8;
+      border-radius: 10px;
+      font-family: var(--font-main);
+      font-size: 0.9rem;
+      transition: border-color 0.2s;
+      background: var(--white);
+      outline: none;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--orange); }
+    .contact-form textarea { resize: vertical; min-height: 120px; }
+
+    /* ---- FOOTER ---- */
+    footer {
+      text-align: center;
+      padding: 30px 24px;
+      font-size: 0.82rem;
+      color: #999;
+      border-top: 1px solid #eee;
+    }
+    footer a { color: var(--orange); text-decoration: none; }
+
+    .social-links {
+      display: flex; gap: 12px; margin-top: 20px;
+    }
+    .social-link {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--white);
+      border: 2px solid #e8e8e8;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      font-size: 0.8rem; font-weight: 700;
+      color: var(--gray);
+      transition: all 0.2s;
+    }
+    .social-link:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+      transform: translateY(-2px);
+    }
+
+    /* ---- ANIMATIONS ---- */
+    .fade-in {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.6s, transform 0.6s;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Isac Gustafsson</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#projekt">Projekt</a></li>
+      <li><a href="#om-mig">Om mig</a></li>
+      <li><a href="#erfarenheter">Erfarenheter</a></li>
+      <li><a href="#utbildning">Utbildning</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Meny">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-text">
+    <span class="label">SYSTEMUTVECKLARE &amp; ARKITEKT</span>
+    <h1>Utvecklare med <span>strategisk</span> kompetens</h1>
+    <p>Jag bygger system som kopplar samman hårdvara, mjukvara och AI. Fokus på arkitektur, automation och långsiktig skalbarhet.</p>
+    <div class="hero-btns">
+      <a href="#kontakt" class="btn btn-primary">&#9993; Kontakta mig</a>
+      <a href="#projekt" class="btn btn-outline">Se projekt &#8594;</a>
+    </div>
+  </div>
+  <div class="hero-image"></div>
+</header>
+
+<!-- PROJECTS -->
+<section id="projekt">
+  <div class="container">
+    <div class="section-header fade-in">
+      <h2>Projekt</h2>
+      <p>Ett urval av system och applikationer jag byggt — från industriella underhållsappar till e-handel och IoT.</p>
+      <div class="line"></div>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card fade-in">
+        <div class="project-thumb" style="background: url('https://impro.usercontent.one/appid/oneComWsb/domain/isacgustafsson.se/media/isacgustafsson.se/onewebmedia/maintplanner.jpg?etag=%2220103-656449f0%22&sourceContentType=image%2Fjpeg&ignoreAspectRatio&resize=651%2B366&extract=0%2B0%2B549%2B366&quality=85') center/cover no-repeat, linear-gradient(135deg, #1a237e, #4a5bc7);">
+          <span class="num">01</span>
+        </div>
+        <div class="project-body">
+          <h3>Maintplanner</h3>
+          <p>Industriell underhållsapplikation för planering, uppföljning och analys av underhållsarbete.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">C#</span>
+            <span class="tech-tag">Angular</span>
+            <span class="tech-tag">.NET</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-thumb" style="background: url('https://impro.usercontent.one/appid/oneComWsb/domain/isacgustafsson.se/media/isacgustafsson.se/onewebmedia/assalub.jpg?etag=%222f0a6-65644b4c%22&sourceContentType=image%2Fjpeg&ignoreAspectRatio&resize=688%2B387&extract=0%2B29%2B688%2B358&quality=85') center/cover no-repeat, linear-gradient(135deg, #004d40, #26a69a);">
+          <span class="num">02</span>
+        </div>
+        <div class="project-body">
+          <h3>Assalub Apps</h3>
+          <p>Mobilapplikationer utvecklade i React Native för industriell smörjning och underhåll.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">React Native</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">Mobile</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-thumb" style="background: url('https://impro.usercontent.one/appid/oneComWsb/domain/isacgustafsson.se/media/isacgustafsson.se/onewebmedia/profilerna.jpg?etag=%2211704-6564530e%22&sourceContentType=image%2Fjpeg&ignoreAspectRatio&resize=602%2B339&extract=2%2B27%2B600%2B311&quality=85') center/cover no-repeat, linear-gradient(135deg, #bf360c, #ff8a65);">
+          <span class="num">03</span>
+        </div>
+        <div class="project-body">
+          <h3>Profilerna</h3>
+          <p>E-handelsplattform byggd i WordPress med WooCommerce för profilprodukter och företagsprofiler.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">WordPress</span>
+            <span class="tech-tag">WooCommerce</span>
+            <span class="tech-tag">PHP</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-thumb" style="background: url('https://impro.usercontent.one/appid/oneComWsb/domain/isacgustafsson.se/media/isacgustafsson.se/onewebmedia/playercompass.jpg?etag=%2268df1-6564544e%22&sourceContentType=image%2Fjpeg&ignoreAspectRatio&resize=736%2B414&extract=48%2B0%2B688%2B414&quality=85') center/cover no-repeat, linear-gradient(135deg, #1b5e20, #66bb6a);">
+          <span class="num">04</span>
+        </div>
+        <div class="project-body">
+          <h3>Player Compass</h3>
+          <p>Sportträningsapp för att följa och analysera spelarnas utveckling och prestationer.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">App Development</span>
+            <span class="tech-tag">UX/UI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-thumb" style="background: url('https://impro.usercontent.one/appid/oneComWsb/domain/isacgustafsson.se/media/isacgustafsson.se/onewebmedia/adaptedmedicalsolutions.jpg?etag=%226945b-656454b7%22&sourceContentType=image%2Fjpeg&ignoreAspectRatio&resize=759%2B427&extract=0%2B44%2B659%2B382&quality=85') center/cover no-repeat, linear-gradient(135deg, #0d47a1, #42a5f5);">
+          <span class="num">05</span>
+        </div>
+        <div class="project-body">
+          <h3>Adapted Medical Solutions</h3>
+          <p>Webbplats för medicintekniskt företag, byggd i WordPress med anpassad design.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">WordPress</span>
+            <span class="tech-tag">PHP</span>
+            <span class="tech-tag">CSS</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-thumb" style="background: url('https://impro.usercontent.one/appid/oneComWsb/domain/isacgustafsson.se/media/isacgustafsson.se/onewebmedia/lomeko.jpg?etag=%2221758-6564554b%22&sourceContentType=image%2Fjpeg&ignoreAspectRatio&resize=688%2B387&extract=0%2B0%2B688%2B375&quality=85') center/cover no-repeat, linear-gradient(135deg, #4a148c, #ab47bc);">
+          <span class="num">06</span>
+        </div>
+        <div class="project-body">
+          <h3>Lomeko</h3>
+          <p>Företagswebbplats byggd med Umbraco CMS med fokus på modern design och användarvänlighet.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Umbraco</span>
+            <span class="tech-tag">C#</span>
+            <span class="tech-tag">CMS</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-thumb" style="background: url('https://impro.usercontent.one/appid/oneComWsb/domain/isacgustafsson.se/media/isacgustafsson.se/onewebmedia/Entr%C3%A9.jpg?etag=%226d601-67b1076c%22&sourceContentType=image%2Fjpeg&ignoreAspectRatio&resize=659%2B494&extract=0%2B44%2B659%2B382&quality=85') center/cover no-repeat, linear-gradient(135deg, #e65100, #ffb74d);">
+          <span class="num">07</span>
+        </div>
+        <div class="project-body">
+          <h3>HGs Lager</h3>
+          <p>Webbplats för lagerförsäljning med produktkatalog och kontaktfunktioner.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">one.com CMS</span>
+            <span class="tech-tag">HTML/CSS</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-thumb" style="background: linear-gradient(135deg, #263238, #78909c);">
+          <span class="num">08</span>
+          <span style="color:rgba(255,255,255,0.25);font-size:2.5rem;">&#127760;</span>
+        </div>
+        <div class="project-body">
+          <h3>mix-IN</h3>
+          <p>Flerspråkig webbplats för integration och samhällsinformation med stöd för flera språk.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">one.com CMS</span>
+            <span class="tech-tag">Multilingual</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="om-mig">
+  <div class="container">
+    <div class="section-header fade-in">
+      <h2>Om mig</h2>
+      <p>Vad andra säger om att arbeta med mig.</p>
+      <div class="line"></div>
+    </div>
+    <div class="quotes-grid">
+      <div class="quote-card fade-in">
+        <p>Isac är lojal, driven och har en unik förmåga att se helheten i projekt. Han kombinerar teknisk kompetens med strategiskt tänkande på ett sätt som gör honom ovärderlig i ett team.</p>
+        <span class="author">— Professionell referens</span>
+      </div>
+      <div class="quote-card fade-in">
+        <p>En kollaborativ problemlösare som alltid hittar vägen framåt. Isac har en naturlig förmåga att bryta ner komplexa problem till hanterbara delar och leverera resultat.</p>
+        <span class="author">— Tidigare arbetsgivare</span>
+      </div>
+      <div class="quote-card fade-in">
+        <p>Isac tar stort ansvar och är alltid villig att gå den extra milen. Hans kombination av teknisk skicklighet och affärsförståelse gör honom till en unik tillgång.</p>
+        <span class="author">— Samarbetspartner</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="erfarenheter">
+  <div class="container">
+    <div class="section-header fade-in">
+      <h2>Erfarenheter</h2>
+      <p>Min professionella resa genom olika branscher och roller.</p>
+      <div class="line"></div>
+    </div>
+    <div class="timeline">
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-icon"><img src="https://impro.usercontent.one/appid/oneComWsb/domain/isacgustafsson.se/media/isacgustafsson.se/onewebmedia/Magello.png?etag=%2214fa-6565a92b%22&sourceContentType=image%2Fpng&ignoreAspectRatio&resize=190%2B54" alt="Webking/Magello"></div>
+        <div class="timeline-content">
+          <h3>Webking / Magello</h3>
+          <div class="dates">2022 — 2023</div>
+          <p>Systemutveckling med fokus på industriella applikationer, underhållssystem och mobilapplikationer.</p>
+          <div class="skills-list">
+            <span class="tech-tag">C#</span>
+            <span class="tech-tag">.NET</span>
+            <span class="tech-tag">Angular</span>
+            <span class="tech-tag">React Native</span>
+            <span class="tech-tag">SQL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-icon"><img src="https://impro.usercontent.one/appid/oneComWsb/domain/isacgustafsson.se/media/isacgustafsson.se/onewebmedia/HimmelsbySpa.png?etag=%222c91-656462f5%22&sourceContentType=image%2Fpng&ignoreAspectRatio&resize=204%2B105" alt="Himmelsby SPA"></div>
+        <div class="timeline-content">
+          <h3>Himmelsby SPA &amp; Konferens</h3>
+          <div class="dates">2015 — 2022</div>
+          <p>Ansvarig för drift, teknik och digitalisering av verksamheten. Hanterade allt från IT-system till kundservice.</p>
+          <div class="skills-list">
+            <span class="tech-tag">IT-drift</span>
+            <span class="tech-tag">Projektledning</span>
+            <span class="tech-tag">Digitalisering</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-icon"><img src="https://impro.usercontent.one/appid/oneComWsb/domain/isacgustafsson.se/media/isacgustafsson.se/onewebmedia/CLSeifert-gold-logo.png?etag=%223025-656463b5%22&sourceContentType=image%2Fpng&ignoreAspectRatio&resize=219%2B100" alt="C.L. Seifert"></div>
+        <div class="timeline-content">
+          <h3>C.L. Seifert</h3>
+          <div class="dates">2014</div>
+          <p>Arbete inom service och logistik med fokus på kundhantering och operativ verksamhet.</p>
+          <div class="skills-list">
+            <span class="tech-tag">Service</span>
+            <span class="tech-tag">Logistik</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-icon"><img src="https://impro.usercontent.one/appid/oneComWsb/domain/isacgustafsson.se/media/isacgustafsson.se/onewebmedia/McDonalds-logo.png?etag=%227741-656463bf%22&sourceContentType=image%2Fpng&ignoreAspectRatio&resize=111%2B100" alt="McDonald's"></div>
+        <div class="timeline-content">
+          <h3>McDonald's</h3>
+          <div class="dates">2012 — 2014</div>
+          <p>Teamarbete i snabb miljö med fokus på effektivitet, kundservice och kvalitetskontroll.</p>
+          <div class="skills-list">
+            <span class="tech-tag">Teamwork</span>
+            <span class="tech-tag">Kundservice</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="utbildning">
+  <div class="container">
+    <div class="section-header fade-in">
+      <h2>Utbildning</h2>
+      <p>Formell utbildning och certifieringar.</p>
+      <div class="line"></div>
+    </div>
+    <div class="edu-cards">
+      <div class="edu-card fade-in">
+        <div class="edu-icon" style="background:var(--white);"><img src="https://impro.usercontent.one/appid/oneComWsb/domain/isacgustafsson.se/media/isacgustafsson.se/onewebmedia/TUC-logo.png?etag=%221033-65646916%22&sourceContentType=image%2Fpng&ignoreAspectRatio&resize=300%2B99&extract=0%2B0%2B300%2B99" alt="TUC"></div>
+        <div>
+          <h3>Systemutvecklare .NET</h3>
+          <span class="school">TUC Yrkeshögskola</span>
+          <p>Utbildning inom systemutveckling med fokus på .NET, C#, databaser och webbutveckling.</p>
+        </div>
+      </div>
+      <div class="edu-card fade-in">
+        <div class="edu-icon" style="background:var(--white);"><img src="https://impro.usercontent.one/appid/oneComWsb/domain/isacgustafsson.se/media/isacgustafsson.se/onewebmedia/forsvarsmakten.png?etag=%22474b-65646ade%22&sourceContentType=image%2Fpng&ignoreAspectRatio&resize=301%2B122&extract=0%2B0%2B300%2B122" alt="Försvarsmakten"></div>
+        <div>
+          <h3>Grundläggande Militär Utbildning (GMU)</h3>
+          <span class="school">Försvarsmakten</span>
+          <p>Militär grundutbildning med fokus på ledarskap, disciplin och teamarbete under press.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="kontakt">
+  <div class="container">
+    <div class="section-header fade-in">
+      <h2>Kontakt</h2>
+      <p>Hör av dig — jag svarar gärna på frågor och tar mig an nya utmaningar.</p>
+      <div class="line"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info fade-in">
+        <h3>Kontaktuppgifter</h3>
+        <div class="contact-item">
+          <div class="contact-icon">&#9742;</div>
+          <div>
+            <span style="font-size:0.78rem;color:#999;">Telefon</span><br>
+            <a href="tel:+46760151525">+46 76-015 15 25</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">&#9993;</div>
+          <div>
+            <span style="font-size:0.78rem;color:#999;">E-post</span><br>
+            <a href="mailto:kontakt@isacgustafsson.se">kontakt@isacgustafsson.se</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">&#9872;</div>
+          <div>
+            <span style="font-size:0.78rem;color:#999;">Plats</span><br>
+            <span style="color:var(--dark);font-weight:500;">Mantorp, 590 18</span>
+          </div>
+        </div>
+        <div class="social-links">
+          <a href="#" class="social-link" title="LinkedIn">in</a>
+          <a href="#" class="social-link" title="Facebook">f</a>
+          <a href="#" class="social-link" title="Instagram">ig</a>
+        </div>
+      </div>
+      <form class="contact-form fade-in" onsubmit="event.preventDefault(); alert('Meddelande skickat! (Demo)')">
+        <div class="form-row">
+          <input type="text" placeholder="Namn" required>
+          <input type="email" placeholder="E-post" required>
+        </div>
+        <div class="form-row">
+          <input type="tel" placeholder="Telefon">
+          <input type="text" placeholder="Ämne" required>
+        </div>
+        <textarea placeholder="Meddelande" required></textarea>
+        <button type="submit" class="btn btn-primary" style="width:fit-content;">Skicka meddelande &#8594;</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 Isac Gustafsson. Alla rättigheter förbehållna. | <a href="#kontakt">kontakt@isacgustafsson.se</a></p>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
