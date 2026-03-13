@@ -140,9 +140,21 @@
       letter-spacing: 0.04em;
     }
     html:not(.dark) .hero-text .label {
+      background: linear-gradient(135deg, #003399, #00AA33);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 0;
+    }
+    html:not(.dark) .hero-text .label::before {
+      content: '';
+      position: absolute;
+      inset: 0;
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.06);
-      color: #00AA33;
+      border-radius: 20px;
+      z-index: -1;
     }
     html:not(.dark) .hero-wrapper .hero-text h1 { color: #e8f0f8; }
     html:not(.dark) .hero-wrapper .hero-text h1 span {
