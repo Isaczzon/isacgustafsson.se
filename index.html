@@ -184,7 +184,13 @@
     .hero-wrapper .btn-outline { border-color: rgba(255,255,255,0.3); color: #fff; }
     .hero-wrapper .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
     html:not(.dark) .hero-wrapper .btn-outline { border-color: rgba(255,255,255,0.25); color: #e0e8f0; }
-    html:not(.dark) .hero-wrapper .btn-outline:hover { border-color: #00d4b0; color: #00d4b0; }
+    html:not(.dark) .hero-wrapper .btn-outline:hover {
+      border-image: linear-gradient(135deg, #003399, #00AA33) 1;
+      background: linear-gradient(135deg, #003399, #00AA33);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
     .hero-image {
       flex: 0 0 300px;
