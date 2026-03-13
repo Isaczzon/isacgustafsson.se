@@ -516,64 +516,6 @@
     .fade-in.visible { opacity: 1; transform: translateY(0); }
   
     /* ---- CV DOWNLOAD SECTION ---- */
-    .cv-download {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 48px;
-      margin-top: 48px;
-      padding: 36px 32px;
-      background: var(--card-bg, #fff);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-    }
-    .cv-download-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .cv-download-btn:hover { transform: translateY(-4px); }
-    .cv-download-btn img {
-      width: 72px;
-      height: 72px;
-      object-fit: contain;
-      opacity: 0.75;
-      transition: opacity 0.2s;
-      filter: var(--icon-filter, none);
-    }
-    .cv-download-btn:hover img { opacity: 1; }
-    .cv-download-btn span {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--orange);
-      letter-spacing: 0.03em;
-    }
-    .cv-roles {
-      text-align: center;
-    }
-    .cv-roles h4 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--orange);
-      margin-bottom: 10px;
-    }
-    .cv-roles ul {
-      list-style: none;
-      padding: 0; margin: 0;
-    }
-    .cv-roles ul li {
-      font-size: 0.9rem;
-      color: var(--text-gray);
-      line-height: 1.9;
-    }
-    html.dark .cv-download-btn img { filter: invert(1) brightness(0.8); }
-    @media (max-width: 600px) {
-      .cv-download { flex-direction: column; gap: 28px; }
-    }
 
     </style>
 </head>
@@ -769,8 +711,9 @@
     </div>
     <div class="edu-card fade-in" style="margin-top:32px;">
       <div style="flex:1;min-width:0;">
-        <h3 style="margin-bottom:8px;">Isac Gustafsson</h3>
-        <p data-i18n="cv_description" style="font-size:0.88rem;color:var(--gray);line-height:1.6;">Front-end, Back-end, Strateg, Försäljare, Marknadsförare och Företagare.</p>
+        <h3 style="margin-bottom:4px;">AI Systems Enterprise Architect</h3>
+        <span class="school">Isac Gustafsson</span>
+        <p data-i18n="cv_description" style="font-size:0.88rem;color:var(--gray);line-height:1.6;margin-top:6px;">Systemarkitekt och fullstack-utvecklare med erfarenhet inom front-end, back-end, strategi, försäljning, marknadsföring och företagande. Kombinerar teknisk kompetens med affärsförståelse för att driva digitala lösningar från idé till produktion.</p>
       </div>
       <a class="edu-cert-download" href="files/Isac_Gustafsson_CV.pdf" download>
         <img src="data:image/png;base64,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" alt="CV" style="filter:var(--icon-filter,none);">
@@ -1058,13 +1001,8 @@
       sec_about:'Om mig',
       download_cv:'CV',
       download_letter:'Personligt Brev',
-      cv_description:'Front-end, Back-end, Strateg, F\u00f6rs\u00e4ljare, Marknadsf\u00f6rare och F\u00f6retagare.',
-      role_frontend:'Front-end',
-      role_backend:'Back-end',
-      role_strategist:'Strateg',
-      role_sales:'Försäljare',
-      role_marketing:'Marknadsförare',
-      role_entrepreneur:'Företagare', sec_about_sub:'Vad andra s\u00e4ger om att arbeta med mig.',
+      cv_description:'Systemarkitekt och fullstack-utvecklare med erfarenhet inom front-end, back-end, strategi, f\u00f6rs\u00e4ljning, marknadsf\u00f6ring och f\u00f6retagande. Kombinerar teknisk kompetens med aff\u00e4rsf\u00f6rst\u00e5else f\u00f6r att driva digitala l\u00f6sningar fr\u00e5n id\u00e9 till produktion.',
+      sec_about_sub:'Vad andra s\u00e4ger om att arbeta med mig.',
       quote1:'Isac \u00e4r lojal, driven och har en unik f\u00f6rm\u00e5ga att se helheten i projekt. Han kombinerar teknisk kompetens med strategiskt t\u00e4nkande p\u00e5 ett s\u00e4tt som g\u00f6r honom ov\u00e4rderlig i ett team.',
       quote2:'En kollaborativ probleml\u00f6sare som alltid hittar v\u00e4gen fram\u00e5t. Isac har en naturlig f\u00f6rm\u00e5ga att bryta ner komplexa problem till hanterbara delar och leverera resultat.',
       quote3:'Isac tar stort ansvar och \u00e4r alltid villig att g\u00e5 den extra milen. Hans kombination av teknisk skicklighet och aff\u00e4rsf\u00f6rst\u00e5else g\u00f6r honom till en unik tillg\u00e5ng.',
@@ -1104,13 +1042,8 @@
       sec_about:'About me',
       download_cv:'CV',
       download_letter:'Personal Letter',
-      cv_description:'Front-end, Back-end, Strategist, Sales, Marketer, and Entrepreneur.',
-      role_frontend:'Front-end',
-      role_backend:'Back-end',
-      role_strategist:'Strategist',
-      role_sales:'Sales',
-      role_marketing:'Marketer',
-      role_entrepreneur:'Entrepreneur', sec_about_sub:'What others say about working with me.',
+      cv_description:'Systems architect and full-stack developer with experience in front-end, back-end, strategy, sales, marketing and entrepreneurship. Combines technical expertise with business acumen to drive digital solutions from concept to production.',
+      sec_about_sub:'What others say about working with me.',
       quote1:'Isac is loyal, driven and has a unique ability to see the big picture in projects. He combines technical expertise with strategic thinking in a way that makes him invaluable in a team.',
       quote2:'A collaborative problem-solver who always finds the way forward. Isac has a natural ability to break complex problems into manageable parts and deliver results.',
       quote3:'Isac takes great responsibility and is always willing to go the extra mile. His combination of technical skill and business understanding makes him a unique asset.',
