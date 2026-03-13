@@ -91,7 +91,34 @@
     }
 
     /* ---- HERO ---- */
+    .hero-wrapper {
+      position: relative;
+      overflow: hidden;
+      background: #0a0a0f;
+    }
+    html:not(.dark) .hero-wrapper {
+      background: #f0f4f8;
+    }
+    #heroCanvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+      background: radial-gradient(ellipse at center, rgba(10,10,15,0.3) 0%, rgba(10,10,15,0.7) 100%);
+      pointer-events: none;
+    }
+    html:not(.dark) .hero-overlay {
+      background: radial-gradient(ellipse at center, rgba(240,244,248,0.2) 0%, rgba(240,244,248,0.6) 100%);
+    }
     .hero {
+      position: relative;
+      z-index: 2;
       padding: 160px 24px 100px;
       max-width: var(--max-width);
       margin: 0 auto;
@@ -102,7 +129,7 @@
     .hero-text { flex: 1; }
     .hero-text .label {
       display: inline-block;
-      background: rgba(0,51,153,0.08);
+      background: rgba(255,255,255,0.08);
       color: var(--orange);
       font-size: 0.8rem;
       font-weight: 600;
@@ -110,6 +137,9 @@
       border-radius: 20px;
       margin-bottom: 20px;
       letter-spacing: 0.04em;
+    }
+    html:not(.dark) .hero-text .label {
+      background: rgba(0,51,153,0.08);
     }
     .hero-text h1 {
       font-family: var(--font-display);
@@ -138,6 +168,10 @@
     .btn-primary:hover { filter: brightness(1.15); transform: translateY(-1px); }
     .btn-outline { background: transparent; color: var(--text); border: 2px solid var(--text-gray); }
     .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
+    .hero-wrapper .btn-outline { border-color: rgba(255,255,255,0.3); color: #fff; }
+    .hero-wrapper .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
+    html:not(.dark) .hero-wrapper .btn-outline { border-color: var(--text-gray); color: var(--dark); }
+    html:not(.dark) .hero-wrapper .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
 
     .hero-image {
       flex: 0 0 300px;
@@ -562,18 +596,22 @@
 </nav>
 
 <!-- HERO -->
-<header class="hero">
-  <div class="hero-text">
-    <span class="label" data-i18n="hero_label">SYSTEMUTVECKLARE &amp; ARKITEKT</span>
-    <h1 data-i18n="hero_h1">Utvecklare med <span>strategisk</span> kompetens</h1>
-    <p data-i18n="hero_p">Jag bygger system som kopplar samman hårdvara, mjukvara och AI. Fokus på arkitektur, automation och långsiktig skalbarhet.</p>
-    <div class="hero-btns">
-      <a href="#kontakt" class="btn btn-primary">&#9993; <span data-i18n="hero_btn1">Kontakta mig</span></a>
-      <a href="#projekt" class="btn btn-outline"><span data-i18n="hero_btn2">Se projekt</span> &#8594;</a>
+<div class="hero-wrapper">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-overlay"></div>
+  <header class="hero">
+    <div class="hero-text">
+      <span class="label" data-i18n="hero_label">SYSTEMUTVECKLARE &amp; ARKITEKT</span>
+      <h1 data-i18n="hero_h1">Utvecklare med <span>strategisk</span> kompetens</h1>
+      <p data-i18n="hero_p">Jag bygger system som kopplar samman hårdvara, mjukvara och AI. Fokus på arkitektur, automation och långsiktig skalbarhet.</p>
+      <div class="hero-btns">
+        <a href="#kontakt" class="btn btn-primary">&#9993; <span data-i18n="hero_btn1">Kontakta mig</span></a>
+        <a href="#projekt" class="btn btn-outline"><span data-i18n="hero_btn2">Se projekt</span> &#8594;</a>
+      </div>
     </div>
-  </div>
-  <div class="hero-image"></div>
-</header>
+    <div class="hero-image"></div>
+  </header>
+</div>
 
 <!-- PROJECTS -->
 <section id="projekt">
@@ -1124,6 +1162,240 @@
     currentLang = currentLang === 'sv' ? 'en' : 'sv';
     applyLang(currentLang);
   });
+
+  // ════════════════════════════════════════
+  // HERO CANVAS ANIMATION
+  // ════════════════════════════════════════
+  (function() {
+    const canvas = document.getElementById('heroCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H, dpr;
+    let particles = [], codeFragments = [], pulses = [];
+    const PARTICLE_COUNT = 80;
+    const CODE_COUNT = 12;
+    const CONNECTION_DIST = 150;
+
+    // Theme colors
+    function getColors() {
+      const dark = document.documentElement.classList.contains('dark');
+      return dark ? {
+        bg: '#0a0a0f',
+        particle: [216, 107, 0],       // orange
+        particleGlow: [240, 160, 80],   // orange-light
+        line: [216, 107, 0],
+        codeFg: [216, 107, 0],
+        nodeBright: [255, 140, 30],
+        pulse: [255, 160, 50]
+      } : {
+        bg: '#f0f4f8',
+        particle: [0, 120, 130],        // teal
+        particleGlow: [0, 180, 160],     // brighter teal
+        line: [0, 120, 130],
+        codeFg: [0, 130, 140],
+        nodeBright: [0, 200, 180],
+        pulse: [0, 180, 160]
+      };
+    }
+
+    function resize() {
+      dpr = window.devicePixelRatio || 1;
+      const wrapper = canvas.parentElement;
+      W = wrapper.offsetWidth;
+      H = wrapper.offsetHeight;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      canvas.style.width = W + 'px';
+      canvas.style.height = H + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    // Particle class
+    function createParticle() {
+      return {
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 2 + 1,
+        brightness: Math.random(),
+        phase: Math.random() * Math.PI * 2,
+        isNode: Math.random() < 0.15
+      };
+    }
+
+    // Code fragment class
+    const codeSnippets = [
+      'async deploy()', 'model.predict()', 'pipeline.run()',
+      'k8s.scale()', 'tf.tensor()', 'api.connect()',
+      'sys.architect()', 'node.link()', 'data.stream()',
+      'ml.train()', 'net.resolve()', 'db.query()',
+      'auth.verify()', 'cloud.sync()', 'ai.inference()',
+      'graph.traverse()', 'event.emit()', 'cache.flush()',
+      'schema.validate()', 'vector.embed()'
+    ];
+
+    function createCodeFragment() {
+      return {
+        x: Math.random() * W,
+        y: Math.random() * H,
+        text: codeSnippets[Math.floor(Math.random() * codeSnippets.length)],
+        opacity: 0,
+        maxOpacity: Math.random() * 0.25 + 0.08,
+        fadeIn: true,
+        speed: Math.random() * 0.3 + 0.1,
+        life: 0,
+        maxLife: Math.random() * 400 + 200
+      };
+    }
+
+    // Pulse along connection
+    function createPulse(x1, y1, x2, y2) {
+      return { x1, y1, x2, y2, t: 0, speed: Math.random() * 0.015 + 0.008 };
+    }
+
+    function init() {
+      resize();
+      particles = [];
+      codeFragments = [];
+      pulses = [];
+      for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(createParticle());
+      for (let i = 0; i < CODE_COUNT; i++) codeFragments.push(createCodeFragment());
+    }
+
+    function draw() {
+      const c = getColors();
+      ctx.fillStyle = c.bg;
+      ctx.fillRect(0, 0, W, H);
+
+      // Draw connections
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < CONNECTION_DIST) {
+            const alpha = (1 - dist / CONNECTION_DIST) * 0.15;
+            ctx.strokeStyle = 'rgba(' + c.line[0] + ',' + c.line[1] + ',' + c.line[2] + ',' + alpha + ')';
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+
+            // Occasionally spawn pulse
+            if (Math.random() < 0.0003 && pulses.length < 15) {
+              pulses.push(createPulse(particles[i].x, particles[i].y, particles[j].x, particles[j].y));
+            }
+          }
+        }
+      }
+
+      // Draw pulses
+      for (let i = pulses.length - 1; i >= 0; i--) {
+        const p = pulses[i];
+        p.t += p.speed;
+        if (p.t > 1) { pulses.splice(i, 1); continue; }
+        const px = p.x1 + (p.x2 - p.x1) * p.t;
+        const py = p.y1 + (p.y2 - p.y1) * p.t;
+        const alpha = Math.sin(p.t * Math.PI) * 0.8;
+        ctx.beginPath();
+        ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(' + c.pulse[0] + ',' + c.pulse[1] + ',' + c.pulse[2] + ',' + alpha + ')';
+        ctx.fill();
+        // glow
+        const grad = ctx.createRadialGradient(px, py, 0, px, py, 8);
+        grad.addColorStop(0, 'rgba(' + c.pulse[0] + ',' + c.pulse[1] + ',' + c.pulse[2] + ',' + (alpha * 0.4) + ')');
+        grad.addColorStop(1, 'rgba(' + c.pulse[0] + ',' + c.pulse[1] + ',' + c.pulse[2] + ',0)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(px - 8, py - 8, 16, 16);
+      }
+
+      // Draw particles
+      const time = Date.now() * 0.001;
+      for (const p of particles) {
+        const flicker = 0.5 + 0.5 * Math.sin(time * 1.5 + p.phase);
+        const alpha = p.brightness * 0.4 + flicker * 0.4;
+
+        if (p.isNode) {
+          // Larger glowing node
+          const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 12);
+          grad.addColorStop(0, 'rgba(' + c.nodeBright[0] + ',' + c.nodeBright[1] + ',' + c.nodeBright[2] + ',' + (alpha * 0.6) + ')');
+          grad.addColorStop(0.4, 'rgba(' + c.particleGlow[0] + ',' + c.particleGlow[1] + ',' + c.particleGlow[2] + ',' + (alpha * 0.2) + ')');
+          grad.addColorStop(1, 'rgba(' + c.particleGlow[0] + ',' + c.particleGlow[1] + ',' + c.particleGlow[2] + ',0)');
+          ctx.fillStyle = grad;
+          ctx.fillRect(p.x - 12, p.y - 12, 24, 24);
+
+          // Cross/plus shape
+          ctx.strokeStyle = 'rgba(' + c.nodeBright[0] + ',' + c.nodeBright[1] + ',' + c.nodeBright[2] + ',' + (alpha * 0.7) + ')';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(p.x - 4, p.y); ctx.lineTo(p.x + 4, p.y);
+          ctx.moveTo(p.x, p.y - 4); ctx.lineTo(p.x, p.y + 4);
+          ctx.stroke();
+        } else {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(' + c.particle[0] + ',' + c.particle[1] + ',' + c.particle[2] + ',' + alpha + ')';
+          ctx.fill();
+        }
+      }
+
+      // Draw code fragments
+      ctx.font = '11px monospace';
+      for (const cf of codeFragments) {
+        if (cf.opacity > 0.01) {
+          ctx.fillStyle = 'rgba(' + c.codeFg[0] + ',' + c.codeFg[1] + ',' + c.codeFg[2] + ',' + cf.opacity + ')';
+          ctx.fillText(cf.text, cf.x, cf.y);
+        }
+      }
+    }
+
+    function update() {
+      // Move particles
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = W;
+        if (p.x > W) p.x = 0;
+        if (p.y < 0) p.y = H;
+        if (p.y > H) p.y = 0;
+      }
+
+      // Update code fragments
+      for (let i = 0; i < codeFragments.length; i++) {
+        const cf = codeFragments[i];
+        cf.life++;
+        cf.y -= cf.speed;
+        if (cf.life < 30) {
+          cf.opacity = Math.min(cf.opacity + cf.maxOpacity / 30, cf.maxOpacity);
+        } else if (cf.life > cf.maxLife - 30) {
+          cf.opacity = Math.max(cf.opacity - cf.maxOpacity / 30, 0);
+        }
+        if (cf.life > cf.maxLife || cf.y < -20) {
+          codeFragments[i] = createCodeFragment();
+          codeFragments[i].y = H + 10;
+        }
+      }
+    }
+
+    let animId;
+    function loop() {
+      update();
+      draw();
+      animId = requestAnimationFrame(loop);
+    }
+
+    init();
+    loop();
+    window.addEventListener('resize', () => { resize(); });
+
+    // Re-init on theme change to refresh colors immediately
+    const origApply = applyTheme;
+    applyTheme = function(dark) {
+      origApply(dark);
+    };
+  })();
 </script>
 
 </body>
