@@ -893,6 +893,121 @@
     submitBtn.disabled = false;
     submitBtn.innerHTML = 'Skicka meddelande \u2192';
   });
+
+  // ════════════════════════════════════════
+  // DARK MODE
+  // ════════════════════════════════════════
+  const themeBtn = document.getElementById('themeToggle');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  let isDark = false;
+  try { isDark = localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && prefersDark); } catch(e) {}
+
+  function applyTheme(dark) {
+    document.documentElement.classList.toggle('dark', dark);
+    themeBtn.textContent = dark ? '\u2600\ufe0f' : '\ud83c\udf19';
+    try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch(e) {}
+  }
+  applyTheme(isDark);
+  themeBtn.addEventListener('click', () => { isDark = !isDark; applyTheme(isDark); });
+
+  // ════════════════════════════════════════
+  // LANGUAGE SWITCHER
+  // ════════════════════════════════════════
+  const langBtn = document.getElementById('langToggle');
+  let currentLang = 'sv';
+  try { currentLang = localStorage.getItem('lang') || 'sv'; } catch(e) {}
+
+  const translations = {
+    sv: {
+      nav_projects:'Projekt', nav_about:'Om mig', nav_experience:'Erfarenheter',
+      nav_education:'Utbildning', nav_contact:'Kontakt',
+      hero_label:'SYSTEMUTVECKLARE &amp; ARKITEKT',
+      hero_h1:'Utvecklare med <span>strategisk</span> kompetens',
+      hero_p:'Jag bygger system som kopplar samman h\u00e5rdvara, mjukvara och AI. Fokus p\u00e5 arkitektur, automation och l\u00e5ngsiktig skalbarhet.',
+      hero_btn1:'Kontakta mig', hero_btn2:'Se projekt',
+      sec_projects:'Projekt',
+      sec_projects_sub:'Ett urval av system och applikationer jag byggt \u2014 fr\u00e5n industriella underh\u00e5llsappar till e-handel och IoT.',
+      proj_maintplanner:'Industriell underh\u00e5llsapplikation f\u00f6r planering, uppf\u00f6ljning och analys av underh\u00e5llsarbete.',
+      proj_assalub:'Mobilapplikationer utvecklade i React Native f\u00f6r industriell sm\u00f6rjning och underh\u00e5ll.',
+      proj_profilerna:'E-handelsplattform byggd i WordPress med WooCommerce f\u00f6r profilprodukter och f\u00f6retagsprofiler.',
+      proj_playercompass:'Sportr\u00e4ningsapp f\u00f6r att f\u00f6lja och analysera spelarnas utveckling och prestationer.',
+      proj_adapted:'Webbplats f\u00f6r medicintekniskt f\u00f6retag, byggd i WordPress med anpassad design.',
+      proj_lomeko:'F\u00f6retagswebbplats byggd med Umbraco CMS med fokus p\u00e5 modern design och anv\u00e4ndarv\u00e4nlighet.',
+      proj_hgs:'Webbplats f\u00f6r lagerf\u00f6rs\u00e4ljning med produktkatalog och kontaktfunktioner.',
+      proj_mixin:'Flerspr\u00e5kig webbplats f\u00f6r integration och samh\u00e4llsinformation med st\u00f6d f\u00f6r flera spr\u00e5k.',
+      sec_about:'Om mig', sec_about_sub:'Vad andra s\u00e4ger om att arbeta med mig.',
+      quote1:'Isac \u00e4r lojal, driven och har en unik f\u00f6rm\u00e5ga att se helheten i projekt. Han kombinerar teknisk kompetens med strategiskt t\u00e4nkande p\u00e5 ett s\u00e4tt som g\u00f6r honom ov\u00e4rderlig i ett team.',
+      quote2:'En kollaborativ probleml\u00f6sare som alltid hittar v\u00e4gen fram\u00e5t. Isac har en naturlig f\u00f6rm\u00e5ga att bryta ner komplexa problem till hanterbara delar och leverera resultat.',
+      quote3:'Isac tar stort ansvar och \u00e4r alltid villig att g\u00e5 den extra milen. Hans kombination av teknisk skicklighet och aff\u00e4rsf\u00f6rst\u00e5else g\u00f6r honom till en unik tillg\u00e5ng.',
+      sec_exp:'Erfarenheter', sec_exp_sub:'Min professionella resa genom olika branscher och roller.',
+      exp_webking:'Systemutveckling med fokus p\u00e5 industriella applikationer, underh\u00e5llssystem och mobilapplikationer.',
+      exp_himmelsby:'Ansvarig f\u00f6r drift, teknik och digitalisering av verksamheten. Hanterade allt fr\u00e5n IT-system till kundservice.',
+      exp_seifert:'Arbete inom service och logistik med fokus p\u00e5 kundhantering och operativ verksamhet.',
+      exp_mcdonalds:'Teamarbete i snabb milj\u00f6 med fokus p\u00e5 effektivitet, kundservice och kvalitetskontroll.',
+      sec_edu:'Utbildning', sec_edu_sub:'Formell utbildning och certifieringar.',
+      edu_tuc:'Utbildning inom systemutveckling med fokus p\u00e5 .NET, C#, databaser och webbutveckling.',
+      edu_military:'Milit\u00e4r grundutbildning med fokus p\u00e5 ledarskap, disciplin och teamarbete under press.',
+      sec_contact:'Kontakt', sec_contact_sub:'H\u00f6r av dig \u2014 jag svarar g\u00e4rna p\u00e5 fr\u00e5gor och tar mig an nya utmaningar.',
+      contact_details:'Kontaktuppgifter',
+      form_name:'Namn', form_email:'E-post', form_phone:'Telefon',
+      form_subject:'\u00c4mne', form_message:'Meddelande', form_submit:'Skicka meddelande \u2192',
+      footer_rights:'Alla r\u00e4ttigheter f\u00f6rbeh\u00e5llna.'
+    },
+    en: {
+      nav_projects:'Projects', nav_about:'About', nav_experience:'Experience',
+      nav_education:'Education', nav_contact:'Contact',
+      hero_label:'SYSTEMS DEVELOPER &amp; ARCHITECT',
+      hero_h1:'Developer with <span>strategic</span> expertise',
+      hero_p:'I build systems that connect hardware, software and AI. Focus on architecture, automation and long-term scalability.',
+      hero_btn1:'Contact me', hero_btn2:'See projects',
+      sec_projects:'Projects',
+      sec_projects_sub:'A selection of systems and applications I have built \u2014 from industrial maintenance apps to e-commerce and IoT.',
+      proj_maintplanner:'Industrial maintenance application for planning, tracking and analysis of maintenance work.',
+      proj_assalub:'Mobile applications developed in React Native for industrial lubrication and maintenance.',
+      proj_profilerna:'E-commerce platform built in WordPress with WooCommerce for profile products and company branding.',
+      proj_playercompass:'Sports training app to track and analyse player development and performance.',
+      proj_adapted:'Website for a medical technology company, built in WordPress with custom design.',
+      proj_lomeko:'Company website built with Umbraco CMS with a focus on modern design and usability.',
+      proj_hgs:'Website for warehouse sales with product catalogue and contact features.',
+      proj_mixin:'Multilingual website for integration and community information with support for several languages.',
+      sec_about:'About me', sec_about_sub:'What others say about working with me.',
+      quote1:'Isac is loyal, driven and has a unique ability to see the big picture in projects. He combines technical expertise with strategic thinking in a way that makes him invaluable in a team.',
+      quote2:'A collaborative problem-solver who always finds the way forward. Isac has a natural ability to break complex problems into manageable parts and deliver results.',
+      quote3:'Isac takes great responsibility and is always willing to go the extra mile. His combination of technical skill and business understanding makes him a unique asset.',
+      sec_exp:'Experience', sec_exp_sub:'My professional journey across different industries and roles.',
+      exp_webking:'Systems development focused on industrial applications, maintenance systems and mobile apps.',
+      exp_himmelsby:'Responsible for operations, technology and digitalisation. Managed everything from IT systems to customer service.',
+      exp_seifert:'Work in service and logistics with a focus on customer management and operational activities.',
+      exp_mcdonalds:'Teamwork in a fast-paced environment focused on efficiency, customer service and quality control.',
+      sec_edu:'Education', sec_edu_sub:'Formal education and certifications.',
+      edu_tuc:'Education in systems development with a focus on .NET, C#, databases and web development.',
+      edu_military:'Basic military training with a focus on leadership, discipline and teamwork under pressure.',
+      sec_contact:'Contact', sec_contact_sub:'Get in touch \u2014 I am happy to answer questions and take on new challenges.',
+      contact_details:'Contact details',
+      form_name:'Name', form_email:'Email', form_phone:'Phone',
+      form_subject:'Subject', form_message:'Message', form_submit:'Send message \u2192',
+      footer_rights:'All rights reserved.'
+    }
+  };
+
+  function applyLang(lang) {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (translations[lang][key] !== undefined) el.innerHTML = translations[lang][key];
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.dataset.i18nPlaceholder;
+      if (translations[lang][key] !== undefined) el.placeholder = translations[lang][key];
+    });
+    langBtn.textContent = lang === 'sv' ? 'EN' : 'SV';
+    document.documentElement.lang = lang === 'sv' ? 'sv' : 'en';
+    try { localStorage.setItem('lang', lang); } catch(e) {}
+  }
+  applyLang(currentLang);
+  langBtn.addEventListener('click', () => {
+    currentLang = currentLang === 'sv' ? 'en' : 'sv';
+    applyLang(currentLang);
+  });
 </script>
 
 </body>
