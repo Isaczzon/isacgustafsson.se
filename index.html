@@ -320,31 +320,31 @@
     /* ---- EDUCATION ---- */
     .edu-cards { display: flex; flex-direction: column; gap: 20px; }
     .edu-card {
-      display: flex; gap: 24px; align-items: center;
+      display: flex; gap: 20px; align-items: center;
       background: var(--light-gray); border-radius: 14px;
-      padding: 28px;
+      padding: 24px;
     }
     .edu-icon {
-      flex: 0 0 160px;
+      flex: 0 0 80px;
+      width: 80px; height: 80px;
       display: flex; align-items: center; justify-content: center;
     }
     .edu-icon img {
-      width: 160px; height: auto;
+      width: 80px; height: 80px;
       object-fit: contain;
-      border-radius: 8px;
     }
-    .edu-card > div { flex: 1; }
+    .edu-card > div { flex: 1; min-width: 0; }
     .edu-cert-download {
-      flex: 0 0 auto;
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      flex: 0 0 80px;
+      width: 80px;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
       text-decoration: none; cursor: pointer;
       transition: transform 0.2s;
     }
     .edu-cert-download:hover { transform: translateY(-3px); }
     .edu-cert-download img {
-      width: 80px; height: 80px;
-      object-fit: cover;
-      border-radius: 10px;
+      width: 64px; height: 64px;
+      object-fit: contain;
       opacity: 0.8;
       transition: opacity 0.2s;
     }
