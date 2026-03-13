@@ -272,10 +272,26 @@
       position: relative;
       z-index: 1;
     }
-    .quote-card .author {
-      font-weight: 600;
+    .quote-card .author-name {
+      display: block;
+      font-weight: 700;
       color: var(--dark);
-      font-size: 0.88rem;
+      font-size: 1rem;
+      margin-top: 4px;
+    }
+    .quote-card .author-title {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--gray);
+      font-style: italic;
+      margin-top: 2px;
+    }
+    .quote-card .author-email {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--orange);
+      text-decoration: underline;
+      margin-top: 4px;
     }
 
     /* ---- EXPERIENCE ---- */
@@ -477,7 +493,7 @@
     .tech-tag { background: var(--tag-bg); color: var(--text-gray); }
     .quote-card { background: var(--bg-section); }
     .quote-card p { color: var(--text-gray); }
-    .quote-card .author { color: var(--text); }
+    .quote-card .author-name { color: var(--text); }
     .timeline-item { background: var(--card-bg); border-color: var(--border); }
     .timeline-content h3 { color: var(--text); }
     .timeline-content p { color: var(--text-gray); }
@@ -697,16 +713,28 @@
     </div>
     <div class="quotes-grid">
       <div class="quote-card fade-in">
-        <p data-i18n="quote1">Isac är lojal, driven och har en unik förmåga att se helheten i projekt. Han kombinerar teknisk kompetens med strategiskt tänkande på ett sätt som gör honom ovärderlig i ett team.</p>
-        <span class="author">— Professionell referens</span>
+        <p data-i18n="quote1">Jag haft förmånen att få jobba med Isac på Magello East. Isac är en mycket lojal och driven medarbetare som sprudlar av idéer. Han är positivt lagd som person och mycket omtyckt av tidigare kollegor. Isac är lätt att samarbeta med och ser sällan hinder kring saker och ting.</p>
+        <span class="author-name">Jimmy Merell</span>
+        <span class="author-title" data-i18n="quote1_title">VD för Magello East</span>
+        <a class="author-email" href="mailto:jimmy.merell@magello.se">jimmy.merell@magello.se</a>
       </div>
       <div class="quote-card fade-in">
-        <p data-i18n="quote2">En kollaborativ problemlösare som alltid hittar vägen framåt. Isac har en naturlig förmåga att bryta ner komplexa problem till hanterbara delar och leverera resultat.</p>
-        <span class="author">— Tidigare arbetsgivare</span>
+        <p data-i18n="quote2">Isac har varit en fantastisk tillgång för vårt företag. Hans lojalitet, drivkraft och unika förmåga att frambringa nya affärsidéer har spelat en viktig roll i våra affärer. Isacs positiva attityd är inspirerande och har gjort honom populär bland såväl kollegor som kunder. Hans entusiasm för att driva försäljningen och viljan att alltid gå ett steg längre är något som verkligen sticker ut. Isacs samarbetsförmåga och hans skicklighet i att se möjligheter där andra ser hinder gör honom till en ovärderlig medarbetare.</p>
+        <span class="author-name">Robert Jansz</span>
+        <span class="author-title" data-i18n="quote2_title">Grundare av Webking</span>
+        <a class="author-email" href="mailto:robert@webking.se">robert@webking.se</a>
       </div>
       <div class="quote-card fade-in">
-        <p data-i18n="quote3">Isac tar stort ansvar och är alltid villig att gå den extra milen. Hans kombination av teknisk skicklighet och affärsförståelse gör honom till en unik tillgång.</p>
-        <span class="author">— Samarbetspartner</span>
+        <p data-i18n="quote3">Isac bidrog stort till ett positivt klimat i klassen. Han är glad, drivande, problemlösande och visar omsorg om de han har omkring sig. Kort sagt en tillgång i vilket team som helst!</p>
+        <span class="author-name">Kicki Sundberg</span>
+        <span class="author-title" data-i18n="quote3_title">Utb. ledare på TUC Yrkeshögskola</span>
+        <a class="author-email" href="mailto:kicki.sundberg@tucsweden.se">kicki.sundberg@tucsweden.se</a>
+      </div>
+      <div class="quote-card fade-in">
+        <p data-i18n="quote4">Älskad av gäster, mån om alla, ett hjärta av guld och total hängivenhet till jobbet - vad mer behöver sägas? Du är en klippa som jag vet alltid gör ditt allra bästa för jobbet. Du blir lyrisk över ökad försäljning även om det innebär merjobb. Du gör mer än vad man kan förvänta sig.</p>
+        <span class="author-name">Rakel Gustafsson</span>
+        <span class="author-title" data-i18n="quote4_title">VD för Himmelsby SPA</span>
+        <a class="author-email" href="mailto:rakel@himmelsbyspa.se">rakel@himmelsbyspa.se</a>
       </div>
     </div>
     <div class="edu-card fade-in" style="margin-top:32px;">
@@ -1003,9 +1031,14 @@
       download_letter:'Personligt Brev',
       cv_description:'Systemarkitekt och fullstack-utvecklare med erfarenhet inom front-end, back-end, strategi, f\u00f6rs\u00e4ljning, marknadsf\u00f6ring och f\u00f6retagande. Kombinerar teknisk kompetens med aff\u00e4rsf\u00f6rst\u00e5else f\u00f6r att driva digitala l\u00f6sningar fr\u00e5n id\u00e9 till produktion.',
       sec_about_sub:'Vad andra s\u00e4ger om att arbeta med mig.',
-      quote1:'Isac \u00e4r lojal, driven och har en unik f\u00f6rm\u00e5ga att se helheten i projekt. Han kombinerar teknisk kompetens med strategiskt t\u00e4nkande p\u00e5 ett s\u00e4tt som g\u00f6r honom ov\u00e4rderlig i ett team.',
-      quote2:'En kollaborativ probleml\u00f6sare som alltid hittar v\u00e4gen fram\u00e5t. Isac har en naturlig f\u00f6rm\u00e5ga att bryta ner komplexa problem till hanterbara delar och leverera resultat.',
-      quote3:'Isac tar stort ansvar och \u00e4r alltid villig att g\u00e5 den extra milen. Hans kombination av teknisk skicklighet och aff\u00e4rsf\u00f6rst\u00e5else g\u00f6r honom till en unik tillg\u00e5ng.',
+      quote1:'Jag haft f\u00f6rm\u00e5nen att f\u00e5 jobba med Isac p\u00e5 Magello East. Isac \u00e4r en mycket lojal och driven medarbetare som sprudlar av id\u00e9er. Han \u00e4r positivt lagd som person och mycket omtyckt av tidigare kollegor. Isac \u00e4r l\u00e4tt att samarbeta med och ser s\u00e4llan hinder kring saker och ting.',
+      quote1_title:'VD f\u00f6r Magello East',
+      quote2:'Isac har varit en fantastisk tillg\u00e5ng f\u00f6r v\u00e5rt f\u00f6retag. Hans lojalitet, drivkraft och unika f\u00f6rm\u00e5ga att frambringa nya aff\u00e4rsid\u00e9er har spelat en viktig roll i v\u00e5ra aff\u00e4rer. Isacs positiva attityd \u00e4r inspirerande och har gjort honom popul\u00e4r bland s\u00e5v\u00e4l kollegor som kunder. Hans entusiasm f\u00f6r att driva f\u00f6rs\u00e4ljningen och viljan att alltid g\u00e5 ett steg l\u00e4ngre \u00e4r n\u00e5got som verkligen sticker ut. Isacs samarbetsf\u00f6rm\u00e5ga och hans skicklighet i att se m\u00f6jligheter d\u00e4r andra ser hinder g\u00f6r honom till en ov\u00e4rderlig medarbetare.',
+      quote2_title:'Grundare av Webking',
+      quote3:'Isac bidrog stort till ett positivt klimat i klassen. Han \u00e4r glad, drivande, probleml\u00f6sande och visar omsorg om de han har omkring sig. Kort sagt en tillg\u00e5ng i vilket team som helst!',
+      quote3_title:'Utb. ledare p\u00e5 TUC Yrkesh\u00f6gskola',
+      quote4:'\u00c4lskad av g\u00e4ster, m\u00e5n om alla, ett hj\u00e4rta av guld och total h\u00e4ngivenhet till jobbet - vad mer beh\u00f6ver s\u00e4gas? Du \u00e4r en klippa som jag vet alltid g\u00f6r ditt allra b\u00e4sta f\u00f6r jobbet. Du blir lyrisk \u00f6ver \u00f6kad f\u00f6rs\u00e4ljning \u00e4ven om det inneb\u00e4r merjobb. Du g\u00f6r mer \u00e4n vad man kan f\u00f6rv\u00e4nta sig.',
+      quote4_title:'VD f\u00f6r Himmelsby SPA',
       sec_exp:'Erfarenheter', sec_exp_sub:'Min professionella resa genom olika branscher och roller.',
       exp_webking:'Systemutveckling med fokus p\u00e5 industriella applikationer, underh\u00e5llssystem och mobilapplikationer.',
       exp_himmelsby:'Ansvarig f\u00f6r drift, teknik och digitalisering av verksamheten. Hanterade allt fr\u00e5n IT-system till kundservice.',
@@ -1044,9 +1077,14 @@
       download_letter:'Personal Letter',
       cv_description:'Systems architect and full-stack developer with experience in front-end, back-end, strategy, sales, marketing and entrepreneurship. Combines technical expertise with business acumen to drive digital solutions from concept to production.',
       sec_about_sub:'What others say about working with me.',
-      quote1:'Isac is loyal, driven and has a unique ability to see the big picture in projects. He combines technical expertise with strategic thinking in a way that makes him invaluable in a team.',
-      quote2:'A collaborative problem-solver who always finds the way forward. Isac has a natural ability to break complex problems into manageable parts and deliver results.',
-      quote3:'Isac takes great responsibility and is always willing to go the extra mile. His combination of technical skill and business understanding makes him a unique asset.',
+      quote1:'I had the privilege of working with Isac at Magello East. Isac is a very loyal and driven colleague who is bursting with ideas. He is a positive person and very well-liked by former colleagues. Isac is easy to work with and rarely sees obstacles.',
+      quote1_title:'CEO of Magello East',
+      quote2:'Isac has been a fantastic asset to our company. His loyalty, drive and unique ability to generate new business ideas has played an important role in our business. Isac\'s positive attitude is inspiring and has made him popular among both colleagues and customers. His enthusiasm for driving sales and the willingness to always go the extra mile truly stands out. Isac\'s collaborative skills and his ability to see opportunities where others see obstacles make him an invaluable employee.',
+      quote2_title:'Founder of Webking',
+      quote3:'Isac contributed greatly to a positive atmosphere in the class. He is cheerful, driven, problem-solving and shows care for those around him. In short, an asset to any team!',
+      quote3_title:'Education leader at TUC Vocational College',
+      quote4:'Loved by guests, caring about everyone, a heart of gold and total dedication to the job - what more needs to be said? You are a rock who I know always does their very best for the job. You get excited about increased sales even when it means more work. You do more than anyone could expect.',
+      quote4_title:'CEO of Himmelsby SPA',
       sec_exp:'Experience', sec_exp_sub:'My professional journey across different industries and roles.',
       exp_webking:'Systems development focused on industrial applications, maintenance systems and mobile apps.',
       exp_himmelsby:'Responsible for operations, technology and digitalisation. Managed everything from IT systems to customer service.',
