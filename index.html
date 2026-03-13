@@ -194,30 +194,12 @@
     .hero-wrapper .btn-outline { border-color: rgba(255,255,255,0.3); color: #fff; }
     .hero-wrapper .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
     html:not(.dark) .hero-wrapper .btn-outline { border-color: rgba(255,255,255,0.25); color: #e0e8f0; }
-    html:not(.dark) .hero-wrapper .btn-outline { border-color: rgba(255,255,255,0.25); color: #e0e8f0; position: relative; overflow: hidden; z-index: 0; }
-    html:not(.dark) .hero-wrapper .btn-outline::before {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      border-radius: 10px;
-      padding: 2px;
-      background: linear-gradient(135deg, #003399, #00AA33);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0;
-      transition: opacity 0.2s;
-      z-index: -1;
-    }
     html:not(.dark) .hero-wrapper .btn-outline:hover {
-      border-color: transparent;
+      border-color: #00AA33;
       background: linear-gradient(135deg, #003399, #00AA33);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-    }
-    html:not(.dark) .hero-wrapper .btn-outline:hover::before {
-      opacity: 1;
     }
 
     .hero-image {
