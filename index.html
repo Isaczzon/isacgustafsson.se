@@ -193,9 +193,18 @@
     .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
     .hero-wrapper .btn-outline { border-color: rgba(255,255,255,0.3); color: #fff; }
     .hero-wrapper .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
-    html:not(.dark) .hero-wrapper .btn-outline { border-color: rgba(255,255,255,0.25); color: #e0e8f0; }
+    html:not(.dark) .hero-wrapper .btn-outline {
+      border: 2px solid rgba(255,255,255,0.25);
+      color: #e0e8f0;
+      background: transparent;
+    }
     html:not(.dark) .hero-wrapper .btn-outline:hover {
-      border-color: #00AA33;
+      border-color: transparent;
+      background:
+        linear-gradient(#1a2332, #1a2332) padding-box,
+        linear-gradient(135deg, #003399, #00AA33) border-box;
+    }
+    html:not(.dark) .hero-wrapper .btn-outline:hover span {
       background: linear-gradient(135deg, #003399, #00AA33);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -635,7 +644,7 @@
       <p data-i18n="hero_p">Jag bygger system som kopplar samman hårdvara, mjukvara och AI. Fokus på arkitektur, automation och långsiktig skalbarhet.</p>
       <div class="hero-btns">
         <a href="#kontakt" class="btn btn-primary">&#9993; <span data-i18n="hero_btn1">Kontakta mig</span></a>
-        <a href="#projekt" class="btn btn-outline"><span data-i18n="hero_btn2">Se projekt</span> &#8594;</a>
+        <a href="#projekt" class="btn btn-outline"><span data-i18n="hero_btn2">Se projekt</span> <span>&#8594;</span></a>
       </div>
     </div>
     <div class="hero-image"></div>
