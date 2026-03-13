@@ -412,6 +412,65 @@
       transform: translateY(-2px);
     }
 
+
+    /* ---- DARK MODE ---- */
+    :root {
+      --bg: #ffffff;
+      --bg-section: #f5f5f5;
+      --card-bg: #ffffff;
+      --text: #1a1a1a;
+      --text-gray: #555;
+      --border: rgba(0,0,0,0.06);
+      --tag-bg: #f5f5f5;
+    }
+    html.dark {
+      --bg: #0f0f13;
+      --bg-section: #16161d;
+      --card-bg: #1e1e28;
+      --text: #e8e8f0;
+      --text-gray: #9999b0;
+      --border: rgba(255,255,255,0.07);
+      --tag-bg: #25252f;
+    }
+    body { background: var(--bg); color: var(--text); }
+    nav { background: color-mix(in srgb, var(--bg) 95%, transparent); }
+    .nav-logo, .nav-links a { color: var(--text); }
+    .hero-text h1 { color: var(--text); }
+    .section-header h2 { color: var(--text); }
+    #projekt, #erfarenheter, #kontakt { background: var(--bg-section); }
+    .project-card { background: var(--card-bg); border-color: var(--border); }
+    .project-body p, .section-header p { color: var(--text-gray); }
+    .tech-tag { background: var(--tag-bg); color: var(--text-gray); }
+    .quote-card { background: var(--bg-section); }
+    .quote-card p { color: var(--text-gray); }
+    .quote-card .author { color: var(--text); }
+    .timeline-item { background: var(--card-bg); border-color: var(--border); }
+    .timeline-content h3 { color: var(--text); }
+    .timeline-content p { color: var(--text-gray); }
+    .edu-card { background: var(--bg-section); }
+    .edu-card h3 { color: var(--text); }
+    .edu-card p { color: var(--text-gray); }
+    .contact-form input, .contact-form textarea {
+      background: var(--card-bg); border-color: var(--border);
+      color: var(--text);
+    }
+    .contact-info h3 { color: var(--text); }
+    .social-link { background: var(--card-bg); border-color: var(--border); color: var(--text-gray); }
+    footer { border-color: var(--border); color: var(--text-gray); }
+
+    /* ---- NAV ACTION BUTTONS ---- */
+    .nav-actions { display: flex; align-items: center; gap: 8px; }
+    .nav-btn {
+      background: none; border: 1.5px solid var(--border);
+      border-radius: 8px; padding: 6px 12px;
+      font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; color: var(--text-gray);
+      transition: all 0.2s; font-family: var(--font-main);
+      white-space: nowrap;
+    }
+    .nav-btn:hover { border-color: var(--orange); color: var(--orange); }
+    .nav-btn.active { border-color: var(--orange); color: var(--orange); background: rgba(216,107,0,0.08); }
+
     /* ---- ANIMATIONS ---- */
     .fade-in {
       opacity: 0; transform: translateY(20px);
@@ -427,12 +486,16 @@
   <div class="nav-inner">
     <a href="#" class="nav-logo">Isac Gustafsson</a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#projekt">Projekt</a></li>
-      <li><a href="#om-mig">Om mig</a></li>
-      <li><a href="#erfarenheter">Erfarenheter</a></li>
-      <li><a href="#utbildning">Utbildning</a></li>
-      <li><a href="#kontakt">Kontakt</a></li>
+      <li><a href="#projekt" data-i18n="nav_projects">Projekt</a></li>
+      <li><a href="#om-mig" data-i18n="nav_about">Om mig</a></li>
+      <li><a href="#erfarenheter" data-i18n="nav_experience">Erfarenheter</a></li>
+      <li><a href="#utbildning" data-i18n="nav_education">Utbildning</a></li>
+      <li><a href="#kontakt" data-i18n="nav_contact">Kontakt</a></li>
     </ul>
+    <div class="nav-actions">
+      <button class="nav-btn" id="langToggle" title="Switch language">EN</button>
+      <button class="nav-btn" id="themeToggle" title="Toggle dark mode">☀️</button>
+    </div>
     <button class="hamburger" id="hamburger" aria-label="Meny">
       <span></span><span></span><span></span>
     </button>
@@ -442,12 +505,12 @@
 <!-- HERO -->
 <header class="hero">
   <div class="hero-text">
-    <span class="label">SYSTEMUTVECKLARE &amp; ARKITEKT</span>
-    <h1>Utvecklare med <span>strategisk</span> kompetens</h1>
-    <p>Jag bygger system som kopplar samman hårdvara, mjukvara och AI. Fokus på arkitektur, automation och långsiktig skalbarhet.</p>
+    <span class="label" data-i18n="hero_label">SYSTEMUTVECKLARE &amp; ARKITEKT</span>
+    <h1 data-i18n="hero_h1">Utvecklare med <span>strategisk</span> kompetens</h1>
+    <p data-i18n="hero_p">Jag bygger system som kopplar samman hårdvara, mjukvara och AI. Fokus på arkitektur, automation och långsiktig skalbarhet.</p>
     <div class="hero-btns">
-      <a href="#kontakt" class="btn btn-primary">&#9993; Kontakta mig</a>
-      <a href="#projekt" class="btn btn-outline">Se projekt &#8594;</a>
+      <a href="#kontakt" class="btn btn-primary">&#9993; <span data-i18n="hero_btn1">Kontakta mig</span></a>
+      <a href="#projekt" class="btn btn-outline"><span data-i18n="hero_btn2">Se projekt</span> &#8594;</a>
     </div>
   </div>
   <div class="hero-image"></div>
@@ -457,8 +520,8 @@
 <section id="projekt">
   <div class="container">
     <div class="section-header fade-in">
-      <h2>Projekt</h2>
-      <p>Ett urval av system och applikationer jag byggt — från industriella underhållsappar till e-handel och IoT.</p>
+      <h2 data-i18n="sec_projects">Projekt</h2>
+      <p data-i18n="sec_projects_sub">Ett urval av system och applikationer jag byggt — från industriella underhållsappar till e-handel och IoT.</p>
       <div class="line"></div>
     </div>
     <div class="projects-grid">
@@ -469,7 +532,7 @@
         </div>
         <div class="project-body">
           <h3><a href="https://webking.se/referensgalleri/maintplanner-industriapp-som-underlaettar-vid-produktionsstopp/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Maintplanner <span style="color:var(--orange);font-size:0.8em;">↗</span></a></h3>
-          <p>Industriell underhållsapplikation för planering, uppföljning och analys av underhållsarbete.</p>
+          <p data-i18n="proj_maintplanner">Industriell underhållsapplikation för planering, uppföljning och analys av underhållsarbete.</p>
           <div class="tech-tags">
             <span class="tech-tag">C#</span>
             <span class="tech-tag">Angular</span>
@@ -484,7 +547,7 @@
         </div>
         <div class="project-body">
           <h3><a href="https://webking.se/referensgalleri/assalub-apps-beraekning-foer-fettdosering-och-viskositet/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Assalub Apps <span style="color:var(--orange);font-size:0.8em;">↗</span></a></h3>
-          <p>Mobilapplikationer utvecklade i React Native för industriell smörjning och underhåll.</p>
+          <p data-i18n="proj_assalub">Mobilapplikationer utvecklade i React Native för industriell smörjning och underhåll.</p>
           <div class="tech-tags">
             <span class="tech-tag">React Native</span>
             <span class="tech-tag">JavaScript</span>
@@ -499,7 +562,7 @@
         </div>
         <div class="project-body">
           <h3><a href="https://profilerna.se/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Profilerna <span style="color:var(--orange);font-size:0.8em;">↗</span></a></h3>
-          <p>E-handelsplattform byggd i WordPress med WooCommerce för profilprodukter och företagsprofiler.</p>
+          <p data-i18n="proj_profilerna">E-handelsplattform byggd i WordPress med WooCommerce för profilprodukter och företagsprofiler.</p>
           <div class="tech-tags">
             <span class="tech-tag">WordPress</span>
             <span class="tech-tag">WooCommerce</span>
@@ -514,7 +577,7 @@
         </div>
         <div class="project-body">
           <h3><a href="https://webking.se/referensgalleri/player-compass-din-nyckel-till-framgaang-som-fotbollsspelare/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Player Compass <span style="color:var(--orange);font-size:0.8em;">↗</span></a></h3>
-          <p>Sportträningsapp för att följa och analysera spelarnas utveckling och prestationer.</p>
+          <p data-i18n="proj_playercompass">Sportträningsapp för att följa och analysera spelarnas utveckling och prestationer.</p>
           <div class="tech-tags">
             <span class="tech-tag">App Development</span>
             <span class="tech-tag">UX/UI</span>
@@ -528,7 +591,7 @@
         </div>
         <div class="project-body">
           <h3><a href="https://medicalsolutions.se/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Adapted Medical Solutions <span style="color:var(--orange);font-size:0.8em;">↗</span></a></h3>
-          <p>Webbplats för medicintekniskt företag, byggd i WordPress med anpassad design.</p>
+          <p data-i18n="proj_adapted">Webbplats för medicintekniskt företag, byggd i WordPress med anpassad design.</p>
           <div class="tech-tags">
             <span class="tech-tag">WordPress</span>
             <span class="tech-tag">PHP</span>
@@ -543,7 +606,7 @@
         </div>
         <div class="project-body">
           <h3><a href="https://lomeko.se/sv/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Lomeko <span style="color:var(--orange);font-size:0.8em;">↗</span></a></h3>
-          <p>Företagswebbplats byggd med Umbraco CMS med fokus på modern design och användarvänlighet.</p>
+          <p data-i18n="proj_lomeko">Företagswebbplats byggd med Umbraco CMS med fokus på modern design och användarvänlighet.</p>
           <div class="tech-tags">
             <span class="tech-tag">Umbraco</span>
             <span class="tech-tag">C#</span>
@@ -558,7 +621,7 @@
         </div>
         <div class="project-body">
           <h3><a href="https://hgslager.se/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">HGs Lager <span style="color:var(--orange);font-size:0.8em;">↗</span></a></h3>
-          <p>Webbplats för lagerförsäljning med produktkatalog och kontaktfunktioner.</p>
+          <p data-i18n="proj_hgs">Webbplats för lagerförsäljning med produktkatalog och kontaktfunktioner.</p>
           <div class="tech-tags">
             <span class="tech-tag">one.com CMS</span>
             <span class="tech-tag">HTML/CSS</span>
@@ -573,7 +636,7 @@
         </div>
         <div class="project-body">
           <h3><a href="https://mix-in.se/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">mix-IN <span style="color:var(--orange);font-size:0.8em;">↗</span></a></h3>
-          <p>Flerspråkig webbplats för integration och samhällsinformation med stöd för flera språk.</p>
+          <p data-i18n="proj_mixin">Flerspråkig webbplats för integration och samhällsinformation med stöd för flera språk.</p>
           <div class="tech-tags">
             <span class="tech-tag">one.com CMS</span>
             <span class="tech-tag">Multilingual</span>
@@ -589,21 +652,21 @@
 <section id="om-mig">
   <div class="container">
     <div class="section-header fade-in">
-      <h2>Om mig</h2>
-      <p>Vad andra säger om att arbeta med mig.</p>
+      <h2 data-i18n="sec_about">Om mig</h2>
+      <p data-i18n="sec_about_sub">Vad andra säger om att arbeta med mig.</p>
       <div class="line"></div>
     </div>
     <div class="quotes-grid">
       <div class="quote-card fade-in">
-        <p>Isac är lojal, driven och har en unik förmåga att se helheten i projekt. Han kombinerar teknisk kompetens med strategiskt tänkande på ett sätt som gör honom ovärderlig i ett team.</p>
+        <p data-i18n="quote1">Isac är lojal, driven och har en unik förmåga att se helheten i projekt. Han kombinerar teknisk kompetens med strategiskt tänkande på ett sätt som gör honom ovärderlig i ett team.</p>
         <span class="author">— Professionell referens</span>
       </div>
       <div class="quote-card fade-in">
-        <p>En kollaborativ problemlösare som alltid hittar vägen framåt. Isac har en naturlig förmåga att bryta ner komplexa problem till hanterbara delar och leverera resultat.</p>
+        <p data-i18n="quote2">En kollaborativ problemlösare som alltid hittar vägen framåt. Isac har en naturlig förmåga att bryta ner komplexa problem till hanterbara delar och leverera resultat.</p>
         <span class="author">— Tidigare arbetsgivare</span>
       </div>
       <div class="quote-card fade-in">
-        <p>Isac tar stort ansvar och är alltid villig att gå den extra milen. Hans kombination av teknisk skicklighet och affärsförståelse gör honom till en unik tillgång.</p>
+        <p data-i18n="quote3">Isac tar stort ansvar och är alltid villig att gå den extra milen. Hans kombination av teknisk skicklighet och affärsförståelse gör honom till en unik tillgång.</p>
         <span class="author">— Samarbetspartner</span>
       </div>
     </div>
@@ -614,8 +677,8 @@
 <section id="erfarenheter">
   <div class="container">
     <div class="section-header fade-in">
-      <h2>Erfarenheter</h2>
-      <p>Min professionella resa genom olika branscher och roller.</p>
+      <h2 data-i18n="sec_exp">Erfarenheter</h2>
+      <p data-i18n="sec_exp_sub">Min professionella resa genom olika branscher och roller.</p>
       <div class="line"></div>
     </div>
     <div class="timeline">
@@ -625,7 +688,7 @@
         <div class="timeline-content">
           <h3>Webking / Magello</h3>
           <div class="dates">2022 — 2023</div>
-          <p>Systemutveckling med fokus på industriella applikationer, underhållssystem och mobilapplikationer.</p>
+          <p data-i18n="exp_webking">Systemutveckling med fokus på industriella applikationer, underhållssystem och mobilapplikationer.</p>
           <div class="skills-list">
             <span class="tech-tag">C#</span>
             <span class="tech-tag">.NET</span>
@@ -641,7 +704,7 @@
         <div class="timeline-content">
           <h3>Himmelsby SPA &amp; Konferens</h3>
           <div class="dates">2015 — 2022</div>
-          <p>Ansvarig för drift, teknik och digitalisering av verksamheten. Hanterade allt från IT-system till kundservice.</p>
+          <p data-i18n="exp_himmelsby">Ansvarig för drift, teknik och digitalisering av verksamheten. Hanterade allt från IT-system till kundservice.</p>
           <div class="skills-list">
             <span class="tech-tag">IT-drift</span>
             <span class="tech-tag">Projektledning</span>
@@ -655,7 +718,7 @@
         <div class="timeline-content">
           <h3>C.L. Seifert</h3>
           <div class="dates">2014</div>
-          <p>Arbete inom service och logistik med fokus på kundhantering och operativ verksamhet.</p>
+          <p data-i18n="exp_seifert">Arbete inom service och logistik med fokus på kundhantering och operativ verksamhet.</p>
           <div class="skills-list">
             <span class="tech-tag">Service</span>
             <span class="tech-tag">Logistik</span>
@@ -668,7 +731,7 @@
         <div class="timeline-content">
           <h3>McDonald's</h3>
           <div class="dates">2012 — 2014</div>
-          <p>Teamarbete i snabb miljö med fokus på effektivitet, kundservice och kvalitetskontroll.</p>
+          <p data-i18n="exp_mcdonalds">Teamarbete i snabb miljö med fokus på effektivitet, kundservice och kvalitetskontroll.</p>
           <div class="skills-list">
             <span class="tech-tag">Teamwork</span>
             <span class="tech-tag">Kundservice</span>
@@ -684,8 +747,8 @@
 <section id="utbildning">
   <div class="container">
     <div class="section-header fade-in">
-      <h2>Utbildning</h2>
-      <p>Formell utbildning och certifieringar.</p>
+      <h2 data-i18n="sec_edu">Utbildning</h2>
+      <p data-i18n="sec_edu_sub">Formell utbildning och certifieringar.</p>
       <div class="line"></div>
     </div>
     <div class="edu-cards">
@@ -694,7 +757,7 @@
         <div>
           <h3>Systemutvecklare .NET</h3>
           <span class="school">TUC Yrkeshögskola</span>
-          <p>Utbildning inom systemutveckling med fokus på .NET, C#, databaser och webbutveckling.</p>
+          <p data-i18n="edu_tuc">Utbildning inom systemutveckling med fokus på .NET, C#, databaser och webbutveckling.</p>
         </div>
       </div>
       <div class="edu-card fade-in">
@@ -702,7 +765,7 @@
         <div>
           <h3>Grundläggande Militär Utbildning (GMU)</h3>
           <span class="school">Försvarsmakten</span>
-          <p>Militär grundutbildning med fokus på ledarskap, disciplin och teamarbete under press.</p>
+          <p data-i18n="edu_military">Militär grundutbildning med fokus på ledarskap, disciplin och teamarbete under press.</p>
         </div>
       </div>
     </div>
@@ -713,13 +776,13 @@
 <section id="kontakt">
   <div class="container">
     <div class="section-header fade-in">
-      <h2>Kontakt</h2>
-      <p>Hör av dig — jag svarar gärna på frågor och tar mig an nya utmaningar.</p>
+      <h2 data-i18n="sec_contact">Kontakt</h2>
+      <p data-i18n="sec_contact_sub">Hör av dig — jag svarar gärna på frågor och tar mig an nya utmaningar.</p>
       <div class="line"></div>
     </div>
     <div class="contact-grid">
       <div class="contact-info fade-in">
-        <h3>Kontaktuppgifter</h3>
+        <h3 data-i18n="contact_details">Kontaktuppgifter</h3>
         <div class="contact-item">
           <div class="contact-icon">&#9742;</div>
           <div>
@@ -749,15 +812,15 @@
       </div>
       <form class="contact-form fade-in" id="contactForm" action="https://formspree.io/f/mlgpnkkj" method="POST">
         <div class="form-row">
-          <input type="text" name="name" placeholder="Namn" required>
-          <input type="email" name="email" placeholder="E-post" required>
+          <input type="text" name="name" data-i18n-placeholder="form_name" placeholder="Namn" required>
+          <input type="email" name="email" data-i18n-placeholder="form_email" placeholder="E-post" required>
         </div>
         <div class="form-row">
-          <input type="tel" name="phone" placeholder="Telefon">
-          <input type="text" name="subject" placeholder="Ämne" required>
+          <input type="tel" name="phone" data-i18n-placeholder="form_phone" placeholder="Telefon">
+          <input type="text" name="subject" data-i18n-placeholder="form_subject" placeholder="Ämne" required>
         </div>
-        <textarea name="message" placeholder="Meddelande" required></textarea>
-        <button type="submit" class="btn btn-primary" style="width:fit-content;" id="submitBtn">Skicka meddelande &#8594;</button>
+        <textarea name="message" data-i18n-placeholder="form_message" placeholder="Meddelande" required></textarea>
+        <button type="submit" class="btn btn-primary" style="width:fit-content;" id="submitBtn" data-i18n="form_submit">Skicka meddelande &#8594;</button>
         <p id="formStatus" style="display:none; margin-top:10px; font-size:0.9rem;"></p>
       </form>
     </div>
@@ -766,7 +829,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>&copy; 2026 Isac Gustafsson. Alla rättigheter förbehållna. | <a href="#kontakt">isacgust@gmail.com</a></p>
+  <p>&copy; 2026 Isac Gustafsson. <span data-i18n="footer_rights">Alla rättigheter förbehållna.</span> | <a href="#kontakt">isacgust@gmail.com</a></p>
 </footer>
 
 <script>
