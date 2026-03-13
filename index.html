@@ -488,7 +488,68 @@
       transition: opacity 0.6s, transform 0.6s;
     }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
-  </style>
+  
+    /* ---- CV DOWNLOAD SECTION ---- */
+    .cv-download {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 48px;
+      padding: 36px 32px;
+      background: var(--card-bg, #fff);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    .cv-download-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .cv-download-btn:hover { transform: translateY(-4px); }
+    .cv-download-btn img {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      opacity: 0.75;
+      transition: opacity 0.2s;
+      filter: var(--icon-filter, none);
+    }
+    .cv-download-btn:hover img { opacity: 1; }
+    .cv-download-btn span {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: 0.03em;
+    }
+    .cv-roles {
+      text-align: center;
+    }
+    .cv-roles h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+    .cv-roles ul {
+      list-style: none;
+      padding: 0; margin: 0;
+    }
+    .cv-roles ul li {
+      font-size: 0.9rem;
+      color: var(--text-gray);
+      line-height: 1.9;
+    }
+    html.dark .cv-download-btn img { filter: invert(1) brightness(0.8); }
+    @media (max-width: 600px) {
+      .cv-download { flex-direction: column; gap: 28px; }
+    }
+
+    </style>
 </head>
 <body>
 
@@ -945,7 +1006,15 @@
       proj_lomeko:'F\u00f6retagswebbplats byggd med Umbraco CMS med fokus p\u00e5 modern design och anv\u00e4ndarv\u00e4nlighet.',
       proj_hgs:'Webbplats f\u00f6r lagerf\u00f6rs\u00e4ljning med produktkatalog och kontaktfunktioner.',
       proj_mixin:'Flerspr\u00e5kig webbplats f\u00f6r integration och samh\u00e4llsinformation med st\u00f6d f\u00f6r flera spr\u00e5k.',
-      sec_about:'Om mig', sec_about_sub:'Vad andra s\u00e4ger om att arbeta med mig.',
+      sec_about:'Om mig',
+      download_cv:'CV',
+      download_letter:'Personligt Brev',
+      role_frontend:'Front-end',
+      role_backend:'Back-end',
+      role_strategist:'Strateg',
+      role_sales:'Försäljare',
+      role_marketing:'Marknadsförare',
+      role_entrepreneur:'Företagare', sec_about_sub:'Vad andra s\u00e4ger om att arbeta med mig.',
       quote1:'Isac \u00e4r lojal, driven och har en unik f\u00f6rm\u00e5ga att se helheten i projekt. Han kombinerar teknisk kompetens med strategiskt t\u00e4nkande p\u00e5 ett s\u00e4tt som g\u00f6r honom ov\u00e4rderlig i ett team.',
       quote2:'En kollaborativ probleml\u00f6sare som alltid hittar v\u00e4gen fram\u00e5t. Isac har en naturlig f\u00f6rm\u00e5ga att bryta ner komplexa problem till hanterbara delar och leverera resultat.',
       quote3:'Isac tar stort ansvar och \u00e4r alltid villig att g\u00e5 den extra milen. Hans kombination av teknisk skicklighet och aff\u00e4rsf\u00f6rst\u00e5else g\u00f6r honom till en unik tillg\u00e5ng.',
@@ -980,7 +1049,15 @@
       proj_lomeko:'Company website built with Umbraco CMS with a focus on modern design and usability.',
       proj_hgs:'Website for warehouse sales with product catalogue and contact features.',
       proj_mixin:'Multilingual website for integration and community information with support for several languages.',
-      sec_about:'About me', sec_about_sub:'What others say about working with me.',
+      sec_about:'About me',
+      download_cv:'CV',
+      download_letter:'Personal Letter',
+      role_frontend:'Front-end',
+      role_backend:'Back-end',
+      role_strategist:'Strategist',
+      role_sales:'Sales',
+      role_marketing:'Marketer',
+      role_entrepreneur:'Entrepreneur', sec_about_sub:'What others say about working with me.',
       quote1:'Isac is loyal, driven and has a unique ability to see the big picture in projects. He combines technical expertise with strategic thinking in a way that makes him invaluable in a team.',
       quote2:'A collaborative problem-solver who always finds the way forward. Isac has a natural ability to break complex problems into manageable parts and deliver results.',
       quote3:'Isac takes great responsibility and is always willing to go the extra mile. His combination of technical skill and business understanding makes him a unique asset.',
