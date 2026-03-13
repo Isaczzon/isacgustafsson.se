@@ -97,7 +97,8 @@
       background: #0a0a0f;
     }
     html:not(.dark) .hero-wrapper {
-      background: #f0f4f8;
+      background: #1a2332;
+      border-bottom: 3px solid rgba(0,180,160,0.3);
     }
     #heroCanvas {
       position: absolute;
@@ -114,7 +115,7 @@
       pointer-events: none;
     }
     html:not(.dark) .hero-overlay {
-      background: radial-gradient(ellipse at center, rgba(240,244,248,0.2) 0%, rgba(240,244,248,0.6) 100%);
+      background: radial-gradient(ellipse at center, rgba(26,35,50,0.15) 0%, rgba(26,35,50,0.5) 100%);
     }
     .hero {
       position: relative;
@@ -139,8 +140,12 @@
       letter-spacing: 0.04em;
     }
     html:not(.dark) .hero-text .label {
-      background: rgba(0,51,153,0.08);
+      background: rgba(0,180,160,0.15);
+      color: #00e0c0;
     }
+    html:not(.dark) .hero-wrapper .hero-text h1 { color: #e8f0f8; }
+    html:not(.dark) .hero-wrapper .hero-text h1 span { color: #00d4b0; }
+    html:not(.dark) .hero-wrapper .hero-text p { color: #a0b0c0; }
     .hero-text h1 {
       font-family: var(--font-display);
       font-size: 3rem;
@@ -170,8 +175,9 @@
     .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
     .hero-wrapper .btn-outline { border-color: rgba(255,255,255,0.3); color: #fff; }
     .hero-wrapper .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
-    html:not(.dark) .hero-wrapper .btn-outline { border-color: var(--text-gray); color: var(--dark); }
-    html:not(.dark) .hero-wrapper .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
+    html:not(.dark) .hero-wrapper .btn-outline { border-color: rgba(255,255,255,0.25); color: #e0e8f0; }
+    html:not(.dark) .hero-wrapper .btn-outline:hover { border-color: #00d4b0; color: #00d4b0; }
+    html:not(.dark) .hero-wrapper .btn-primary { background: linear-gradient(135deg, #008878, #00c4a0); }
 
     .hero-image {
       flex: 0 0 300px;
@@ -1186,15 +1192,17 @@
         line: [216, 107, 0],
         codeFg: [216, 107, 0],
         nodeBright: [255, 140, 30],
-        pulse: [255, 160, 50]
+        pulse: [255, 160, 50],
+        boost: 1
       } : {
-        bg: '#f0f4f8',
-        particle: [0, 120, 130],        // teal
-        particleGlow: [0, 180, 160],     // brighter teal
-        line: [0, 120, 130],
-        codeFg: [0, 130, 140],
-        nodeBright: [0, 200, 180],
-        pulse: [0, 180, 160]
+        bg: '#1a2332',
+        particle: [0, 200, 170],        // bright teal
+        particleGlow: [0, 230, 200],     // vivid teal
+        line: [0, 180, 160],
+        codeFg: [0, 210, 180],
+        nodeBright: [0, 255, 210],
+        pulse: [50, 230, 200],
+        boost: 2.2
       };
     }
 
@@ -1275,7 +1283,7 @@
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < CONNECTION_DIST) {
-            const alpha = (1 - dist / CONNECTION_DIST) * 0.15;
+            const alpha = (1 - dist / CONNECTION_DIST) * 0.15 * c.boost;
             ctx.strokeStyle = 'rgba(' + c.line[0] + ',' + c.line[1] + ',' + c.line[2] + ',' + alpha + ')';
             ctx.lineWidth = 0.5;
             ctx.beginPath();
@@ -1315,7 +1323,7 @@
       const time = Date.now() * 0.001;
       for (const p of particles) {
         const flicker = 0.5 + 0.5 * Math.sin(time * 1.5 + p.phase);
-        const alpha = p.brightness * 0.4 + flicker * 0.4;
+        const alpha = Math.min((p.brightness * 0.4 + flicker * 0.4) * c.boost, 1);
 
         if (p.isNode) {
           // Larger glowing node
