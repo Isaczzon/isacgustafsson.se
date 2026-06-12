@@ -1055,7 +1055,7 @@
           <div class="contact-icon">&#9993;</div>
           <div>
             <span style="font-size:0.78rem;color:var(--text-gray);">E-post</span><br>
-            <a href="mailto:isacgust@gmail.com">isacgust@gmail.com</a>
+            <a href="mailto:isacgust@hotmail.com">isacgust@hotmail.com</a>
           </div>
         </div>
         <div class="contact-item">
@@ -1081,6 +1081,7 @@
           <input type="text" name="subject" data-i18n-placeholder="form_subject" placeholder="Ämne" required>
         </div>
         <textarea name="message" data-i18n-placeholder="form_message" placeholder="Meddelande" required></textarea>
+        <div id="captchaContainer"></div>
         <button type="submit" class="btn btn-primary" style="width:fit-content;" id="submitBtn" data-i18n="form_submit">Skicka meddelande &#8594;</button>
         <p id="formStatus" style="display:none; margin-top:10px; font-size:0.9rem;"></p>
       </form>
@@ -1090,7 +1091,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>&copy; 2026 Isac Gustafsson. <span data-i18n="footer_rights">Alla rättigheter förbehållna.</span> | <a href="#kontakt">isacgust@gmail.com</a></p>
+  <p>&copy; 2026 Isac Gustafsson. <span data-i18n="footer_rights">Alla rättigheter förbehållna.</span> | <a href="#kontakt">isacgust@hotmail.com</a></p>
 </footer>
 
 <script>
@@ -1128,6 +1129,14 @@
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const captchaToken = (typeof turnstile !== 'undefined' && captchaWidgetId !== null)
+      ? turnstile.getResponse(captchaWidgetId) : '';
+    if (!captchaToken) {
+      status.textContent = translations[currentLang].form_captcha_err;
+      status.style.color = '#c62828';
+      status.style.display = 'block';
+      return;
+    }
     submitBtn.disabled = true;
     submitBtn.textContent = 'Skickar...';
     status.style.display = 'none';
@@ -1151,6 +1160,7 @@
       status.style.color = '#c62828';
       status.style.display = 'block';
     }
+    if (captchaWidgetId !== null) turnstile.reset(captchaWidgetId);
     submitBtn.disabled = false;
     submitBtn.innerHTML = 'Skicka meddelande \u2192';
   });
@@ -1170,6 +1180,33 @@
   }
   applyTheme(isDark);
   themeBtn.addEventListener('click', () => { isDark = !isDark; applyTheme(isDark); });
+
+  // ════════════════════════════════════════
+  // CLOUDFLARE TURNSTILE
+  // ════════════════════════════════════════
+  const TURNSTILE_SITE_KEY = '0x4AAAAAADjmRwF4RQq21nYT';
+  let captchaWidgetId = null;
+
+  function renderTurnstile() {
+    const holder = document.getElementById('captchaContainer');
+    holder.innerHTML = '';
+    const inner = document.createElement('div');
+    holder.appendChild(inner);
+    captchaWidgetId = turnstile.render(inner, {
+      sitekey: TURNSTILE_SITE_KEY,
+      theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+    });
+  }
+
+  window.onTurnstileLoad = renderTurnstile;
+
+  // Widgeten kan inte byta tema efter rendering — rendera om vid temabyte,
+  // men bara om den är olöst så att en klar verifiering inte tappas
+  themeBtn.addEventListener('click', () => {
+    if (captchaWidgetId !== null && !turnstile.getResponse(captchaWidgetId)) {
+      renderTurnstile();
+    }
+  });
 
   // ════════════════════════════════════════
   // LANGUAGE SWITCHER
@@ -1228,6 +1265,7 @@
       contact_details:'Kontaktuppgifter',
       form_name:'Namn', form_email:'E-post', form_phone:'Telefon',
       form_subject:'\u00c4mne', form_message:'Meddelande', form_submit:'Skicka meddelande \u2192',
+      form_captcha_err:'V\u00e4nta tills s\u00e4kerhetskontrollen \u00e4r klar innan du skickar.',
       footer_rights:'Alla r\u00e4ttigheter f\u00f6rbeh\u00e5llna.'
     },
     en: {
@@ -1279,6 +1317,7 @@
       contact_details:'Contact details',
       form_name:'Name', form_email:'Email', form_phone:'Phone',
       form_subject:'Subject', form_message:'Message', form_submit:'Send message \u2192',
+      form_captcha_err:'Please wait for the security check to finish before sending.',
       footer_rights:'All rights reserved.'
     }
   };
@@ -1538,6 +1577,7 @@
     };
   })();
 </script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&render=explicit" async defer></script>
 
 </body>
 </html>
