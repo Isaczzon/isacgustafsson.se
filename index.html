@@ -7,6 +7,19 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
   <link rel="apple-touch-icon" href="images/favicon-180.png">
+  <script>
+    /* Gate the scroll-reveal on JS actually working. Without this class the
+       .fade-in rule never hides anything, so no-JS renders the full page. */
+    document.documentElement.classList.add('js');
+    /* Watchdog: if the reveal code never initialised (an error earlier in the
+       main script, a blocked/failed script), drop the gate so nothing stays
+       invisible. */
+    window.addEventListener('DOMContentLoaded', function () {
+      setTimeout(function () {
+        if (!window.__revealReady) document.documentElement.classList.remove('js');
+      }, 1000);
+    });
+  </script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -613,7 +626,7 @@
     .nav-btn.active { border-color: var(--orange); color: var(--orange); background: rgba(216,107,0,0.08); }
 
     /* ---- ANIMATIONS ---- */
-    .fade-in {
+    html.js .fade-in {
       opacity: 0; transform: translateY(20px);
       transition: opacity 0.6s, transform 0.6s;
     }
@@ -673,7 +686,7 @@
         animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important; scroll-behavior: auto !important;
       }
-      .fade-in { opacity: 1; transform: none; }
+      html.js .fade-in { opacity: 1; transform: none; }
     }
     </style>
 </head>
@@ -1168,16 +1181,28 @@
     link.addEventListener('click', () => navLinks.classList.remove('open'));
   });
 
-  // Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
+  // Scroll reveal — must fail open: never leave content invisible
+  const revealAll = () => document.querySelectorAll('.fade-in')
+    .forEach(el => el.classList.add('visible'));
 
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  if (!('IntersectionObserver' in window)) {
+    revealAll();
+  } else {
+    try {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    } catch (e) {
+      revealAll();
+    }
+  }
+  window.__revealReady = true;
 
   // Contact form submission
   const form = document.getElementById('contactForm');
