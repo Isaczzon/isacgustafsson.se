@@ -11,14 +11,6 @@
     /* Gate the scroll-reveal on JS actually working. Without this class the
        .fade-in rule never hides anything, so no-JS renders the full page. */
     document.documentElement.classList.add('js');
-    /* Watchdog: if the reveal code never initialised (an error earlier in the
-       main script, a blocked/failed script), drop the gate so nothing stays
-       invisible. */
-    window.addEventListener('DOMContentLoaded', function () {
-      setTimeout(function () {
-        if (!window.__revealReady) document.documentElement.classList.remove('js');
-      }, 1000);
-    });
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
@@ -1165,6 +1157,34 @@
 </footer>
 
 <script>
+  /* Scroll reveal. Deliberately its own <script> block, ahead of the main one:
+     a parse or runtime error in that block cannot stop this from running, so
+     .fade-in content can never be left stuck at opacity 0. */
+  (function () {
+    var revealAll = function () {
+      document.querySelectorAll('.fade-in').forEach(function (el) {
+        el.classList.add('visible');
+      });
+    };
+    try {
+      if (!('IntersectionObserver' in window)) { revealAll(); return; }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade-in').forEach(function (el) {
+        observer.observe(el);
+      });
+    } catch (e) {
+      /* Last resort: drop the gate so the CSS stops hiding anything at all. */
+      document.documentElement.classList.remove('js');
+      revealAll();
+    }
+  })();
+</script>
+
+<script>
   // Navbar scroll effect
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
@@ -1180,29 +1200,6 @@
   navLinks.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => navLinks.classList.remove('open'));
   });
-
-  // Scroll reveal — must fail open: never leave content invisible
-  const revealAll = () => document.querySelectorAll('.fade-in')
-    .forEach(el => el.classList.add('visible'));
-
-  if (!('IntersectionObserver' in window)) {
-    revealAll();
-  } else {
-    try {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      }, { threshold: 0.1 });
-
-      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-    } catch (e) {
-      revealAll();
-    }
-  }
-  window.__revealReady = true;
 
   // Contact form submission
   const form = document.getElementById('contactForm');
