@@ -618,11 +618,8 @@
     .nav-btn.active { border-color: var(--orange); color: var(--orange); background: rgba(216,107,0,0.08); }
 
     /* ---- ANIMATIONS ---- */
-    html.js .fade-in {
-      opacity: 0; transform: translateY(20px);
-      transition: opacity 0.6s, transform 0.6s;
-    }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in { transition: opacity 0.6s, transform 0.6s; }
+    html.js .fade-in:not(.visible) { opacity: 0; transform: translateY(20px); }
   
     /* ---- CV DOWNLOAD SECTION ---- */
 
@@ -678,7 +675,7 @@
         animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important; scroll-behavior: auto !important;
       }
-      html.js .fade-in { opacity: 1; transform: none; }
+      html.js .fade-in:not(.visible) { opacity: 1; transform: none; }
     }
     </style>
 </head>
