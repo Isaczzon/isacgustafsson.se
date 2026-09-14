@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Isac Gustafsson — Utvecklare & Strategisk Kompetens</title>
+  <title>Isac Gustafsson — AI Systems Enterprise Architect</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
   <link rel="apple-touch-icon" href="images/favicon-180.png">
@@ -468,6 +468,35 @@
     .edu-card .school { font-size: 0.88rem; color: var(--orange); font-weight: 600; }
     .edu-card p { font-size: 0.85rem; color: var(--gray); margin-top: 6px; }
 
+    /* ---- AI & AUTOMATION ---- */
+    .ai-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+      gap: 20px; margin-bottom: 40px;
+    }
+    .stat-card, .cap-card {
+      background: var(--light-gray); border-radius: 14px;
+      padding: 24px; border: 1px solid var(--border);
+    }
+    .stat-figure {
+      font-family: var(--font-display);
+      font-size: 1.55rem; font-weight: 700; color: var(--orange);
+      line-height: 1.15; margin-bottom: 8px;
+    }
+    .stat-card p, .cap-card p {
+      font-size: 0.88rem; color: var(--gray); line-height: 1.6;
+    }
+    .cap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(420px, 100%), 1fr));
+      gap: 20px;
+    }
+    .cap-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+    .cap-card .tech-tags { margin-top: 12px; }
+    html.dark .stat-card, html.dark .cap-card { background: var(--bg-section); }
+    html.dark .cap-card h3 { color: var(--text); }
+    html.dark .stat-card p, html.dark .cap-card p { color: var(--text-gray); }
+
     /* ---- CONTACT ---- */
     #kontakt { background: var(--light-gray); }
     .contact-grid {
@@ -686,6 +715,7 @@
   <div class="nav-inner">
     <a href="#" class="nav-logo">Isac Gustafsson</a>
     <ul class="nav-links" id="navLinks">
+      <li><a href="#ai" data-i18n="nav_ai">AI</a></li>
       <li><a href="#projekt" data-i18n="nav_projects">Projekt</a></li>
       <li><a href="#om-mig" data-i18n="nav_about">Om mig</a></li>
       <li><a href="#erfarenheter" data-i18n="nav_experience">Erfarenheter</a></li>
@@ -708,9 +738,9 @@
   <div class="hero-overlay"></div>
   <header class="hero">
     <div class="hero-text">
-      <span class="label" data-i18n="hero_label">SYSTEMUTVECKLARE &amp; ARKITEKT</span>
-      <h1 data-i18n="hero_h1">Utvecklare med <span>strategisk</span> kompetens</h1>
-      <p data-i18n="hero_p">Jag bygger system som kopplar samman hårdvara, mjukvara och AI. Fokus på arkitektur, automation och långsiktig skalbarhet.</p>
+      <span class="label" data-i18n="hero_label">AI SYSTEMS ENTERPRISE ARCHITECT</span>
+      <h1 data-i18n="hero_h1">Arkitekt för <span>AI-driven</span> verksamhet</h1>
+      <p data-i18n="hero_p">Jag designar AI-system som tar över arbete i stället för att lägga till det. På Combitech har jag kortat ned ett halvårs arbete till fyra timmar och automatiserat bort över halva min egen tjänst.</p>
       <div class="hero-btns">
         <a href="#kontakt" class="btn btn-primary">&#9993; <span data-i18n="hero_btn1">Kontakta mig</span></a>
         <a href="#projekt" class="btn btn-outline"><span data-i18n="hero_btn2">Se projekt</span> <span>&#8594;</span></a>
@@ -719,6 +749,63 @@
     <div class="hero-image"></div>
   </header>
 </div>
+
+<!-- AI & AUTOMATION -->
+<section id="ai">
+  <div class="container">
+    <div class="section-header fade-in">
+      <h2 data-i18n="sec_ai">AI &amp; Automation</h2>
+      <p data-i18n="sec_ai_sub">Det jag arbetar med idag: att bygga AI in i verksamheten, inte bredvid den.</p>
+      <div class="line"></div>
+    </div>
+
+    <div class="ai-stats">
+      <div class="stat-card fade-in">
+        <div class="stat-figure" data-i18n="ai_stat1_fig">6 m&aring;nader &rarr; 4 timmar</div>
+        <p data-i18n="ai_stat1">Ett arbetsmoment som var beräknat till upp till ett halvår automatiserades ned till en eftermiddag.</p>
+      </div>
+      <div class="stat-card fade-in">
+        <div class="stat-figure" data-i18n="ai_stat2_fig">&Ouml;ver 50&nbsp;%</div>
+        <p data-i18n="ai_stat2">av min egen tjänst är bortautomatiserad — tid som i stället går till arkitektur och nya lösningar.</p>
+      </div>
+      <div class="stat-card fade-in">
+        <div class="stat-figure" data-i18n="ai_stat3_fig">Processer omvända</div>
+        <p data-i18n="ai_stat3">Arbetsflöden omformade från grunden så att processen anpassar sig efter verksamheten — inte tvärtom.</p>
+      </div>
+    </div>
+
+    <div class="cap-grid">
+      <div class="cap-card fade-in">
+        <h3 data-i18n="ai_cap1_h">LLM-integration i aff&auml;rssystem</h3>
+        <p data-i18n="ai_cap1">Språkmodeller inbyggda där arbetet redan sker, med tydliga gränssnitt mot befintliga system i stället för fristående verktyg vid sidan om.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">LLM</span><span class="tech-tag">API-design</span><span class="tech-tag">Systemintegration</span>
+        </div>
+      </div>
+      <div class="cap-card fade-in">
+        <h3 data-i18n="ai_cap2_h">Agentsystem &amp; automation</h3>
+        <p data-i18n="ai_cap2">Agenter som utför flerstegsarbete end-to-end med verktygsanrop, felhantering och kontrollpunkter där en människa behöver fatta beslutet.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">Agenter</span><span class="tech-tag">Verktygsanrop</span><span class="tech-tag">Orkestrering</span>
+        </div>
+      </div>
+      <div class="cap-card fade-in">
+        <h3 data-i18n="ai_cap3_h">RAG &ouml;ver f&ouml;retagsdata</h3>
+        <p data-i18n="ai_cap3">Sökbara kunskapssystem ovanpå organisationens egen dokumentation och data, med spårbara källor bakom varje svar.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">RAG</span><span class="tech-tag">Vektors&ouml;k</span><span class="tech-tag">Dokumentflöden</span>
+        </div>
+      </div>
+      <div class="cap-card fade-in">
+        <h3 data-i18n="ai_cap4_h">AI-arkitektur &amp; strategi</h3>
+        <p data-i18n="ai_cap4">Var AI hör hemma i systemlandskapet, vad som ska byggas själv och vad som ska köpas in — med säkerhet, spårbarhet och förvaltning från start.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">Arkitektur</span><span class="tech-tag">Governance</span><span class="tech-tag">S&auml;kerhet</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- PROJECTS -->
 <section id="projekt">
@@ -913,7 +1000,7 @@
       <div style="flex:1;min-width:0;">
         <h3 style="margin-bottom:4px;">AI Systems Enterprise Architect</h3>
         <span class="school">Isac Gustafsson</span>
-        <p data-i18n="cv_description" style="font-size:0.88rem;color:var(--gray);line-height:1.6;margin-top:6px;">Systemarkitekt och fullstack-utvecklare med erfarenhet inom front-end, back-end, strategi, försäljning, marknadsföring och företagande. Kombinerar teknisk kompetens med affärsförståelse för att driva digitala lösningar från idé till produktion.</p>
+        \g<1>AI Systems Enterprise Architect med bakgrund som fullstack-utvecklare och erfarenhet av strategi, försäljning och företagande. Bygger AI och automation in i verksamhetens system och kombinerar teknisk djup med affärsförståelse — från idé till drift.\g<2>
       </div>
       <a class="edu-cert-download" href="files/Isac_Gustafsson_CV.pdf" download>
         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJ4AAACeCAYAAADDhbN7AAAACXBIWXMAAAsTAAALEwEAmpwYAAAUe0lEQVR4nO2dDZAlVXWA500UMWo0hqDEkKgQKoxUjFmNycbNc+fdc87teTNDNtSLGhcJia4kgEnkT/PDEEFTRFTERGOZmFSCWviDMZIqK6JRfhQXKgKGCqJEhN0V5adgFVjm523qNPe8PdPz3rx+3f36zfQ7p+riuNN9+97ub86999xzz5mYMDExMTExMTExMdkksrCwMNlqtX5s1O0wGSPRwDGAo22NyThIrV6vP4l/AIATnHMz/LPBZzJMmVTQnYKID3vvDzrnTuV/k9+ZmBQ9tNZYswHAJVEUHSSiFSI66L1fRMRZvs7gMyl8Pue9/wlE/NTMzAxDt4SIbURcYa3nvb/fe/8Sfb2JSWZRQ+sLEPEmhg4RBTr++SAALAcNeNu2bduO4uttzmeSGzpE3EpEdyvoDiYLwxc04dVTU1OHhSpqo+2ByaYTGS6J6ETv/X7WaAxXN+g0fM1mk3/+gKrD4DNJLfEwCQB/4L1fJqI2AKysB50qseYDgHO4DltsmAyk6RDxtbxoYOh4AZESOim84OB7TuK6DD6TviKQeO/fPjs7y5prcUDo+B4xszzUaDRexvXZStekn8Rzsvn5+WcQ0e4wbC5ngY/nhd77OxDxaK7TVrom/SQGZHp6eoqIvsdD7gBzvDUrXUS8tl6vPz3UbYsNk1T2u4iIWOO1te1ugLLEK10iulxpPYPPJJUd74yguQbWegn4LtD1mpikWeW+O9jouhqQ+5R4ZcxzPufc67k+g8+kn9QOHjwYFyL6ZI7FRjusdB9zzjW4YoPPZF2R1SgiPpuIbsyz0g0OBfdu3779RVynmVlM0g65xxLR3rwrXSK6BQCO5DrNzGKSdrGx3Xv/KA+dWVa6ysxydb1ePzxUbytdk1TwvYEXC7w3m2el673/ENdnWs9kEPjekWOl24EPERd0vSYmvYSHRVlwXMHwZFlshBKbWViDcn0GXwVPhiULLxiyFgGk0Wj8lPf+68FfL4uBOTazENHjzrkm17lr164n52lbmaXe473anHViYpJtcMOqm//jnDseEe/LsdgQM8sDRPTrVZnztcbVVCQdn52d/XEiaoYjibucc38MAOcCwF+GchEi/k23QkSX8K5FKO8FgMvYwxgAPoyI/wwAn+aCiN/PCl4Cvr0A8M5e7RllAYC/RsQLnXPny7tzzv2Zc+4s59yfENFp3vudRPRKcYqowh/QQCIdbjQaLwSA69l80Ww22zwf61b491kKD7HBLpdlftdt2G1nbUsZpdnj/an3GE8dEPG7ALBTf4txkLijRPQi7/231MpzMZSlPIUXEsmSVdN1gy9v+0ZYFkNpe+/b+gjAOMBXU5P+29c7GWYFh1Xa8sfovX9cvLArDZ86fP3qnDY2K5i7iJH8XfrbVH1P9W0GHo60yEF3RPxM+Dy1cfAk+aesXiRWsCjwxDh+XeXBk84h4r+nOYStXNrLKEV91DLb3M7aJwEPAG7U36bq4P1XGvDCrkEpJYfr/EjbTev3KQ14t0yMgcTgAcDuNNtYAPAIADwMAPuHXcIh77yaTzTNIgAcQMTHQh/igog/KqMv8MQ7eyTlUHvHxLgIIt6yDnjy8duNRsO1Wq2nzs7OHsEexsMo9Xr9CH4GEb0vq3lHTdSv8N7/EiK+uNFoHMcGcu/9z3JpNpvP27Fjx5HD6geGwu+K/Qg5GmqXdzr24N2RAjz+3ZYSbEyxFuYNdCK6Mos3i/qIN4mBfFRzpoXwrpxzr+gHXvDU/vbEuAh3dh33dK3xdIiJ2hBL/LHq9fqzOEJByoVP8kO2Qxy+ea5ry5YtTw711sosrWCymp6e3pYGPES8U/2xVFomubNpwHPOvbQsq7o8w3t/jPf+7kHPbajzGp+Qfk6MQFoBvLQaL4BX/RVtq9U6DAC+s9HAS3407/2PBvRokQ34Rzi8xqjga2UDb7Ly4LEbFADEGqWHCWNk4CVc51+nhtyVAbehLhzVNlQrJXgSHxoR72JlEG6vpObbFOAlIo7+FYdD4/gsKed88cckojtPPPHEZ+l+b1TwAOBu/iajaGtZsmnAY2HPaH4uIr6Fh121xZdqR4CIfm8UWq9l4PWc4z11M4CnV4je+ylE/ALDx4bm9QBU4F0/gjZPGHi97WVPB4B7NgF4cZvlQ/L/8mkzIroveNbw8Nuz/cFVvi73ltXgloG3RmoqEcqeTQJeLHJqi3/mCKIAcEWIKNpxquxmWkHEfym7/S0Db43EneJJNwDs20zgJRL0yX7zDl4R9tB+cizyhzMzM8eH+0s3CaGBt8oz5dmbFLw1eXB5pwMA3sfzPmV6aeu8GnwSrszhtpUBPJ53h9sNvI0KXjftx4GCEPFWpf2WldbbMzc39xy5bwOCd0/VY0BXCbyOyUVpP140vZ2IDijTy1KY651VltZrDW5A3uuce2a43cDbDODpj632el9GRDeEYXYpaL1vc7/L+LitwTXevrLaNiqpLHhJ7ee9fwqf6OfQtmr+9xdlaL2WgTde4HVbfADAy3nuF7bdOMTtz4fLJof1fANvTMFLLD4YgGfyqbr5+XkOI/HOYWu9loE31uCtmfs5504moveX8cwJA2+8wZO2b/Cdi30GXgXB67btNkwx8NbKWINXlrQMvDVi4JUgLQNvjRh4JUjLwFsjBl4J0jLw1oiBV4K0DLz84LHln+8x8NKLgZcfPPbw/TW+x8BLLwZeAeBVKa9EWdIy8PKDBwC/wfcYeOnFwMt/5oJTtb+i8oGhCxYDb63UlLfG3g0EXq/IS5tSWgZe7uONQwOPh+4QRqzWz7VpwGE+z4erTRQgBt7GBK/jpCmysLDwJE74wk6azrmf44+QuEY8izsfpU8GxCwfr2bgVRQ81lySKZLTWSHi+Yj4OUT8PwB4UMUPfpAjlgLAZzkBHREdpdog6RKORsTPI+JXEPEGzseGiN/g5My6r2nbNfGEt/IFXBciXouIXw31XqbqSlWngbeBwJP7Z2ZmnouI/4CIBySpXIjutKrwv0VRFCf1Q8QfOOdOVfXE/Yii6Mtzc3N87bJc672/FwCO1P3tI5P8H+fcz0RRdC/XEUURA7Ec6v77Qftv4OWPnVIIeCr0BBDR3nD6a0Un3FNJ5uTfJDDPkiSc49SkXE+YG7KGOiUc4pF7lkJYi51p29w6dDhI6npcns/PzrJlaOBtAPDk3AOHm+DzriFA9lJ4BsO1whpO0otKqtGwXRe3TSAIQbnfI3WHSPT7JGqoipcySIqmSf6P9/4qOYsrEeSJ6MsD1NMRA2+tSMyRp5UBnjrn2gkrq2FSmux+RLwaEf8VAD4JALfz7xJR6TtgAUAc9y7U/QGVk00iB+xHxGPDJZMp0mv9IiI+mgSYiE7P0ncDL398vDzgdWyG3vv/0VHcVfy6ewDg9ORLn5qaOoyIiCf4Qft17gvzwbvq9fpz+VoAmFYZdDrQeO//qF+7W4eijp6rgz4GeL/PeTHCpQPt2hh4+SOCZgZPzZ3O11kiFXQ38oRetSuO/qnNGjyXI6KPBShEUwpYZ4f6n8JRA0Q7qnwX1+o+98mt8TV1v2i7D2fpt77HwCsfPFk9/zRrNfUc0Sb3O+d+ga/ZtWuXGJFr3c7Ehmw5PPTG8PLkP2i423jKEK45u0uY2gNE9Cu9FgYL4d+IaJuKLB/fG9r4yl739hMDr0DwsqzqiOi3dWpSFTbsAr067SUCn/f+vGDa4AA8YmLZw4uL8PtjEPFhBZBEfj9ft6dHG9+vFhWijW9Q/R0YBAOvGPAGDuWqtNW7knMnnsTzZD4lzHF7t2/ffgxnIgKAmxHxg4j4+zL/Uqaaj2qAwlzwZmlLUqNOBG3qve/k+1DD+J8O2mctBl5O8MIqdHrQj6BWi59Lmih4N0C3ZYBgPJIHYpUo8GZDf1YNmd1iIMvPURSdpOaP8ofxIBE9P1yayRXMwCsAPA54OCB4nYUBAPx3ctKOiH83YH2dOgXqhONAp0+I+E2VrUiG20uTz1Pzuyv1H0Zo38f1NVnEwCsGPMgCHptRAOBbyWGMiN48YH2r6u0mar52UZfhNploJQaq2Wy+EBH3K9tdfL33fiZj+9a0x8DLBp6sQCkLeOxtwoGx5RnK+HvKgPX1FdFOzWbzBF7NKpuemFZOkmeqofmsLouKm9k8o/uRRQy8EYLHphS9O6I03skD1rcqy0+/5yLiqq2vsFj4qH5myBb0FTFqq7a9NUvbkmLgjRC8ZrP5k+zulBxqAeBNA9a3ql4eKnmO18M/j4fbk9VWm/ThAfbzk2t5C4/Ubodss0VRdJw8YyKHGHgjBI9XoYj49S47ApdlAY/njNPT089bB4qachy4J4DVeW4URa+XCxHxvV0WFf9W1KEmA2804HWuZUfOpDkFAK4Jl00OaJph+93jnM8MES/m1Tbv6XZ7Lq9ku5hxPq/mnt9Rmjie37FpZdB+9uu/gTci8BBxoYsB+SFeUYZLUxmQWdOxfS24Tq3MzMwsc0xjRPxD/r0YiQXSmZmZl+uhNKzQF9k+x+5ZYruDQyvfb87Pzz9DPzOPGHgjAk9pqa3KqKs3+M9T+7Q9RYBi96QwHIrD56J2+EzuTvBChIiu08N82Ko7h4guD359y+rfLxq0j+uJgVcAeIjosxp8+R72QtGpngLM9/L+qoIvqfk6TgL1ev0IIrpDGYbFVX6v7NXqj6W2685MOg547x8goocS6eYPIOKLizy0buDlBC+8lLmcblFnioYJWk9sZl8Vnzo5RabsbJMCpff+49rRQGXqubhHu2RVzcPzDzRkRMTgd7RvpOZ+RX5wA68A8Jxz83nMH+xmH0XRLd0cQXmSDwA7kync6/X64WzyQMRrAmQCnWi77/EpM32PFmVa+ccEtJ19XDi02n1dxv71FANvtOB1hi7nHEVRFLumA0A76foOAHsA4IuI+AkAuAoA/pddoBKu77G2Cy5RZ67XJgWe03NMKWpR8V1e5ep3U4QYeCMGT98HAG8O2ktOj8nP8cuXgz79Dvsg4qf0+dx+tkQi6jgqKPCWw6LiPcOIkmDgjXCO1+PA9JuISHYw4lWlmDXU/9f/Hv/MRyHDPPHTadNrqhXxW/WxRVkZ4xOpRYcSdNLAW39X4a6U4O0ocv+S524AsDvY5OKTZHL6TEpYgca/l1NorDFVrJXUxxb5tJn3fn/QpNyn2Abovb9Ov5MixcBbKzVZLQJAx3rfDTw1D/qdoi364YBOEwA+wvM59koOuwcyzLI22hOOPJ4hSY75/j5DbNf+sic0J9JDxOtC+YbYAIcR98/AW0fj9QGvMwEHgFcXbVzVHzs4cB7LB3M4+igPf977KWWji9vdJ0hP3z6XKS0DLz94iPiqIUzAO3a7NJGlCtBK3T5mbWJIYuCtc5ZUuyyNALxVbZL8slICaHLGtpBndClDEwNvnRfTB7x2ieBVTloGXk+pIeKd/TQeT/Sdc6/hGwy89GLgFQAeb2klPEBM+oiBVwx4cWQmAy+9GHj5wBPvjTgSp4GXXgy83mLgDVEMvN5i4A1RDLzeYuANUQy83mLgDVEMvJzgBc+QXWMGXk2VSV14R2W9IjsvcogJAH7TwMsIHgC8cUzAq4U+5vZWUZ7XpvFyaLwzqg5eS3m+sM9fOCh0NIfLbTQax3Fxzh3P2YgA4JcbjcZLuERR9FL2qOESwmI4Ls65Gedcg0PkGnirxcBLzMeC48RvIeKXEPExAHgEAA6owlEMJPmKJIVZBVMyO5E6VN6rGHjjCF7rUMSDX+VIpeIV3Q2glCBp7dY50ZYGPA5yFJpl4FUZvNahQ0g7vfeP6XMgCXDylnUBDR5Ae03jHSpLOqxYlcBTk/+G934xvAc5+VZaEdezKIr21ev1VWeLqyqTacDjk12ctrNi4NUEPu/99RKTpWzowiErOdh+3jhAFwuH708DHgCcUyXw1FHLExIxVErVdHxkkw+0O+fOGBvoWHRg7PXAY5NAlcDTUQaitZEKyoKO53ZLEg+6Ku82lYw7eM6515QNHs8jWcvxYqbRaLxKvdfx0HYsnHq9z4uv5FCrNN5pOpBQSdDxQfKHAACr9E6LBm8xaLw/T5N3bBPa7s5ORJIaKnQhYsJ9nLRvbKFLC14I97pQRfAA4IIywFPQ7ZE082ML3TiDpyKGXlwCeHGoNe/9nbzPq58/tmLg4d8OGbzYAE9EtwLAC/iZdkR0APB4SKoieACQjBY6DOh2E9FR/DyDbvDFxYVVGiIUeJcPadcitgYQ0Rcl2qhBlw28d1QRPES8MvSvMPAAQGyfV23dujXOm2HQJWTcwQOAzxSs8QS6j0kGyGHE3tv0Mq7gKXPKfxQ0x2sr6D4kOxEGXX7wLq6ok8B/FgBeW/ktxpnAUwQGH29Ju2VGRJdUCTwVnvZLOcFjTScZKXVKKoOuoL3aSysEXicoIwBck2OvVvvSvYXrM+gKBo9zu0r4Wh21czMWSbAcgo9/LSN4bQXdmWPpYVISeO+umMaTE2U3DeoWpXzpFhO+dAZdUeCpfGPXctpOADg3nBPd7OUsHh4BYN8gHshyPsJ7/2ij0TipQn+MG07jxSWZ7qkqhdIfVVzlS8d52fj9GXQZBQBuTwOe5BGrYGmnhS54mNzHiZ/53Rl0OQQAbhvFmYPNVED50iHiFn5vBl1OQUQDD9eHLgzJfDZlit+ZQVeA5Z6IPliW6/cmhu5WIno+vy+DriDw+K+YiH4YXnbpZ0s3cFkKW2C7JXW9QVeQqCyKl87NzfFL5khINuRiZ5vwCxLLxNyaipXY4MkRijiNZsjfulJAgJqVQYrOUVtSSSZjXlaBegS6z87Pz5sv3RBF9iyfFgyre4PZII5gVEbROWrLKOvY9VYCdB/hrcHwbgy6IUrHb2x6evo5IZJlssynKZxCnpMqI+JrEfF3UxS+7tQByhs4HrMuzrnTAOD0tIV3LfiAui74xB8d72S8sV6vHx7ei/nSlSCShHjsZeGJP0Lbdy1ZOsmLN2LhleWwy4RBZ2JiYmJiYmJiMrG55f8BAg6HIB2kO+oAAAAASUVORK5CYII=" alt="CV" style="filter:var(--icon-filter,none);">
@@ -942,7 +1029,7 @@
         <div class="timeline-content">
           <h3><a href="https://www.combitech.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Combitech Sverige <span style="color:var(--orange);font-size:0.8em;">↗</span></a></h3>
           <div class="dates">2024 — Nu</div>
-          <p data-i18n="exp_combitech">Software Engineer med fokus på utveckling i ett innovativt team. Kombinerar erfarenhet inom systemutveckling för att skapa nya lösningar.</p>
+          \g<1>Rollen utgår från hårdvara, dokumentation och testning. Jag har byggt AI och automation ovanpå den, format om arbetsflödena efter verksamheten och automatiserat bort över halva den egna tjänsten.\g<2>
           <div class="skills-list">
             <span class="tech-tag">Software Engineering</span>
             <span class="tech-tag">Systemutveckling</span>
@@ -1293,12 +1380,29 @@
 
   const translations = {
     sv: {
+      nav_ai:'AI',
       nav_projects:'Projekt', nav_about:'Om mig', nav_experience:'Erfarenheter',
       nav_education:'Utbildning', nav_contact:'Kontakt',
-      hero_label:'SYSTEMUTVECKLARE &amp; ARKITEKT',
-      hero_h1:'Utvecklare med <span>strategisk</span> kompetens',
-      hero_p:'Jag bygger system som kopplar samman h\u00e5rdvara, mjukvara och AI. Fokus p\u00e5 arkitektur, automation och l\u00e5ngsiktig skalbarhet.',
+      hero_label:'AI SYSTEMS ENTERPRISE ARCHITECT',
+      hero_h1:'Arkitekt för <span>AI-driven</span> verksamhet',
+      hero_p:'Jag designar AI-system som tar över arbete i stället för att lägga till det. På Combitech har jag kortat ned ett halvårs arbete till fyra timmar och automatiserat bort över halva min egen tjänst.',
       hero_btn1:'Kontakta mig', hero_btn2:'Se projekt',
+      sec_ai:'AI & Automation',
+      sec_ai_sub:'Det jag arbetar med idag: att bygga AI in i verksamheten, inte bredvid den.',
+      ai_stat1_fig:'6 månader → 4 timmar',
+      ai_stat1:'Ett arbetsmoment som var beräknat till upp till ett halvår automatiserades ned till en eftermiddag.',
+      ai_stat2_fig:'Över 50 %',
+      ai_stat2:'av min egen tjänst är bortautomatiserad — tid som i stället går till arkitektur och nya lösningar.',
+      ai_stat3_fig:'Processer omvända',
+      ai_stat3:'Arbetsflöden omformade från grunden så att processen anpassar sig efter verksamheten — inte tvärtom.',
+      ai_cap1_h:'LLM-integration i affärssystem',
+      ai_cap1:'Språkmodeller inbyggda där arbetet redan sker, med tydliga gränssnitt mot befintliga system i stället för fristående verktyg vid sidan om.',
+      ai_cap2_h:'Agentsystem & automation',
+      ai_cap2:'Agenter som utför flerstegsarbete end-to-end med verktygsanrop, felhantering och kontrollpunkter där en människa behöver fatta beslutet.',
+      ai_cap3_h:'RAG över företagsdata',
+      ai_cap3:'Sökbara kunskapssystem ovanpå organisationens egen dokumentation och data, med spårbara källor bakom varje svar.',
+      ai_cap4_h:'AI-arkitektur & strategi',
+      ai_cap4:'Var AI hör hemma i systemlandskapet, vad som ska byggas själv och vad som ska köpas in — med säkerhet, spårbarhet och förvaltning från start.',
       sec_projects:'Projekt',
       sec_projects_sub:'Ett urval av system och applikationer jag byggt \u2014 fr\u00e5n industriella underh\u00e5llsappar till e-handel och IoT.',
       proj_maintplanner:'Industriell underh\u00e5llsapplikation f\u00f6r planering, uppf\u00f6ljning och analys av underh\u00e5llsarbete.',
@@ -1313,7 +1417,7 @@
       sec_about:'Om mig',
       download_cv:'CV',
       download_letter:'Personligt Brev',
-      cv_description:'Systemarkitekt och fullstack-utvecklare med erfarenhet inom front-end, back-end, strategi, f\u00f6rs\u00e4ljning, marknadsf\u00f6ring och f\u00f6retagande. Kombinerar teknisk kompetens med aff\u00e4rsf\u00f6rst\u00e5else f\u00f6r att driva digitala l\u00f6sningar fr\u00e5n id\u00e9 till produktion.',
+      cv_description:'AI Systems Enterprise Architect med bakgrund som fullstack-utvecklare och erfarenhet av strategi, försäljning och företagande. Bygger AI och automation in i verksamhetens system och kombinerar teknisk djup med affärsförståelse — från idé till drift.',
       sec_about_sub:'Vad andra s\u00e4ger om att arbeta med mig.',
       quote1:'Jag haft f\u00f6rm\u00e5nen att f\u00e5 jobba med Isac p\u00e5 Magello East. Isac \u00e4r en mycket lojal och driven medarbetare som sprudlar av id\u00e9er. Han \u00e4r positivt lagd som person och mycket omtyckt av tidigare kollegor. Isac \u00e4r l\u00e4tt att samarbeta med och ser s\u00e4llan hinder kring saker och ting.',
       quote1_title:'VD f\u00f6r Magello East',
@@ -1323,7 +1427,7 @@
       quote3_title:'Utb. ledare p\u00e5 TUC Yrkesh\u00f6gskola',
       quote4:'\u00c4lskad av g\u00e4ster, m\u00e5n om alla, ett hj\u00e4rta av guld och total h\u00e4ngivenhet till jobbet - vad mer beh\u00f6ver s\u00e4gas? Du \u00e4r en klippa som jag vet alltid g\u00f6r ditt allra b\u00e4sta f\u00f6r jobbet. Du blir lyrisk \u00f6ver \u00f6kad f\u00f6rs\u00e4ljning \u00e4ven om det inneb\u00e4r merjobb. Du g\u00f6r mer \u00e4n vad man kan f\u00f6rv\u00e4nta sig.',
       quote4_title:'VD f\u00f6r Himmelsby SPA',
-      exp_combitech:'Software Engineer med fokus på utveckling i ett innovativt team. Kombinerar erfarenhet inom systemutveckling för att skapa nya lösningar.',
+      exp_combitech:'Rollen utgår från hårdvara, dokumentation och testning. Jag har byggt AI och automation ovanpå den, format om arbetsflödena efter verksamheten och automatiserat bort över halva den egna tjänsten.',
       exp_cil:'Grundare och delägare med fokus på innovativa lösningar för att förebygga vatten- och fuktskador. Systemutveckling och automation för hållbara produkter.',
       exp_military:'Hemvärnssoldat med insikter inom ledarskap, stresshantering, disciplin och teamwork. Rycker ut ett par gånger per år.',
       exp_kd:'Styrelseledamot och nämndman i byggnad- & räddningsnämnden. Kommunfullmäktigeledamot 2018–2022 och ordförande för KD Mjölby 2019–2021.',
@@ -1345,12 +1449,29 @@
       footer_rights:'Alla r\u00e4ttigheter f\u00f6rbeh\u00e5llna.'
     },
     en: {
+      nav_ai:'AI',
       nav_projects:'Projects', nav_about:'About', nav_experience:'Experience',
       nav_education:'Education', nav_contact:'Contact',
-      hero_label:'SYSTEMS DEVELOPER &amp; ARCHITECT',
-      hero_h1:'Developer with <span>strategic</span> expertise',
-      hero_p:'I build systems that connect hardware, software and AI. Focus on architecture, automation and long-term scalability.',
+      hero_label:'AI SYSTEMS ENTERPRISE ARCHITECT',
+      hero_h1:'Architect for <span>AI-driven</span> operations',
+      hero_p:'I design AI systems that take work over rather than add to it. At Combitech I have cut half a year of work down to four hours and automated away more than half of my own role.',
       hero_btn1:'Contact me', hero_btn2:'See projects',
+      sec_ai:'AI & Automation',
+      sec_ai_sub:'What I work on today: building AI into the business, not alongside it.',
+      ai_stat1_fig:'6 months → 4 hours',
+      ai_stat1:'A task estimated at up to half a year was automated down to a single afternoon.',
+      ai_stat2_fig:'Over 50%',
+      ai_stat2:'of my own role is automated away — time that now goes into architecture and new solutions.',
+      ai_stat3_fig:'Processes inverted',
+      ai_stat3:'Workflows rebuilt from the ground up so the process adapts to the business, not the other way around.',
+      ai_cap1_h:'LLM integration in business systems',
+      ai_cap1:'Language models built in where the work already happens, with clear interfaces to existing systems rather than standalone tools on the side.',
+      ai_cap2_h:'Agent systems & automation',
+      ai_cap2:'Agents that carry out multi-step work end to end, with tool calls, error handling and checkpoints wherever a human needs to make the call.',
+      ai_cap3_h:'RAG over company data',
+      ai_cap3:'Searchable knowledge systems on top of an organisation\'s own documentation and data, with traceable sources behind every answer.',
+      ai_cap4_h:'AI architecture & strategy',
+      ai_cap4:'Where AI belongs in the system landscape, what to build and what to buy — with security, traceability and maintainability from the start.',
       sec_projects:'Projects',
       sec_projects_sub:'A selection of systems and applications I have built \u2014 from industrial maintenance apps to e-commerce and IoT.',
       proj_maintplanner:'Industrial maintenance application for planning, tracking and analysis of maintenance work.',
@@ -1365,7 +1486,7 @@
       sec_about:'About me',
       download_cv:'CV',
       download_letter:'Personal Letter',
-      cv_description:'Systems architect and full-stack developer with experience in front-end, back-end, strategy, sales, marketing and entrepreneurship. Combines technical expertise with business acumen to drive digital solutions from concept to production.',
+      cv_description:'AI Systems Enterprise Architect with a background in full-stack development and experience across strategy, sales and entrepreneurship. Builds AI and automation into the systems a business already runs on, combining technical depth with commercial understanding — from idea to production.',
       sec_about_sub:'What others say about working with me.',
       quote1:'I had the privilege of working with Isac at Magello East. Isac is a very loyal and driven colleague who is bursting with ideas. He is a positive person and very well-liked by former colleagues. Isac is easy to work with and rarely sees obstacles.',
       quote1_title:'CEO of Magello East',
@@ -1375,7 +1496,7 @@
       quote3_title:'Education leader at TUC Vocational College',
       quote4:'Loved by guests, caring about everyone, a heart of gold and total dedication to the job - what more needs to be said? You are a rock who I know always does their very best for the job. You get excited about increased sales even when it means more work. You do more than anyone could expect.',
       quote4_title:'CEO of Himmelsby SPA',
-      exp_combitech:'Software Engineer focused on development in an innovative team. Combines experience in systems development to create new solutions.',
+      exp_combitech:'The role is grounded in hardware, documentation and testing. I have built AI and automation on top of it, reshaped the workflows around the business and automated away more than half of my own role.',
       exp_cil:'Founder and part-owner focused on innovative solutions to prevent water and moisture damage. Systems development and automation for sustainable products.',
       exp_military:'Home Guard soldier with insights into leadership, stress management, discipline and teamwork. Called out a couple of times per year.',
       exp_kd:'Board member and alderman in the building and rescue committee. Member of municipal council 2018–2022 and chairman of KD Mjölby 2019–2021.',
